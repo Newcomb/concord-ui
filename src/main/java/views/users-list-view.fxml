@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <ListView id="usersList" fx:id="usersList" prefHeight="256.0" prefWidth="200.0" />
+   </center>
+   <bottom>
+      <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#OnCloseButtonClicked" prefHeight="26.0" prefWidth="50.0" text="Close" />
+            <Button fx:id="actionButton" mnemonicParsing="false" onAction="#OnActionButtonClicked" prefHeight="26.0" prefWidth="75.0" />
+            <Button fx:id="actionButtonTwo" mnemonicParsing="false" onAction="#OnActionButtonTwoClicked" prefHeight="26.0" prefWidth="82.0" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

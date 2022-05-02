@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="276.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="textLabel" alignment="CENTER" prefHeight="124.0" prefWidth="461.0" text="Create/Edit Channel" />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="131.0" text="Channel Name" />
+            <TextField fx:id="channelNameField" />
+            <Text fx:id="nameWarning" fill="#e13131" strokeType="OUTSIDE" strokeWidth="0.0" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="131.0" text="Channel Status" />
+            <CheckBox fx:id="channelLocked" mnemonicParsing="false" text="Locked" />
+            <CheckBox fx:id="channelUnlocked" mnemonicParsing="false" prefHeight="18.0" prefWidth="81.0" text="Unlocked">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </CheckBox>
+            <Text fx:id="statusWarning" fill="#dd3030" strokeType="OUTSIDE" strokeWidth="0.0">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Text>
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onCancelButtonClicked" text="Cancel" />
+            <Button fx:id="submitButton" mnemonicParsing="false" onAction="#onCreateButtonClicked" text="Submit" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
