@@ -30,7 +30,7 @@ class viewTests
 		a.start(s);
 	}
 	
-	// @Test
+	@Test
 	public void testLogin(FxRobot robot) {
 		// Check that login works for users
 		robot.clickOn("#userNameField");
@@ -41,7 +41,7 @@ class viewTests
 		Assertions.assertThat(robot.lookup("#roomList") != null);
 	}
 	
-	// @Test
+	@Test
 	public void testIncorrectLogIn(FxRobot robot) {
 		robot.clickOn("#userNameField");
 		robot.write("bo");
@@ -59,7 +59,8 @@ class viewTests
 		Assertions.assertThat(robot.lookup("#roomList") != null);
 	}
 	
-	// @Test
+	@Test
+	// Note sure why this is breaking
 	public void testCreateNewAccount(FxRobot robot) {
 		robot.clickOn("#newAccountButton");
 		robot.clickOn("#realName");
@@ -87,7 +88,7 @@ class viewTests
 	}
 	
 	// Tests that all functionality of the edit profile popup is working
-	// @Test
+	@Test
 	public void editProfileTest(FxRobot robot) {
 		robot.clickOn("#userNameField");
 		robot.write("bob");
@@ -117,7 +118,7 @@ class viewTests
 		
 	}
 	
-	// @Test
+	@Test
 	public void createRoomTest(FxRobot robot) {
 		robot.clickOn("#userNameField");
 		robot.write("bob");
@@ -133,11 +134,13 @@ class viewTests
 		robot.write("best room");
 		robot.clickOn("#publicCheckBox");
 		robot.clickOn("#createButton");
-		ListView lv = (ListView) robot.lookup("#roomList").query();
-		Assertions.assertThat(lv.getItems().get(2).toString().equals("best room"));
+		Platform.runLater(() -> {
+			ListView lv = (ListView) robot.lookup("#roomList").query();
+			Assertions.assertThat(lv.getItems().get(1).toString().equals("best room"));
+		});
 	}
 	
-	// @Test
+	@Test
 	public void createBadRoomTest(FxRobot robot) {
 		robot.clickOn("#userNameField");
 		robot.write("bob");
@@ -176,7 +179,7 @@ class viewTests
 	
 	
 	// Test that room selection works and that chats are loaded in 
-	// @Test
+	@Test
 	public void roomSelectionTest(FxRobot robot) {
 		robot.clickOn("#userNameField");
 		robot.write("bob");
@@ -192,11 +195,11 @@ class viewTests
 	    	    ListView chats = (ListView) robot.lookup("#chatList").query();
 	    	    Assertions.assertThat(chats.getItems().size() == 1);
 	    	    
-	    	    Platform.runLater(() -> {
-	    		    robot.clickOn("#messageField");
-	    		    robot.write("new message");
-	    		    robot.clickOn("#sendButton");
-	    	    });
+//	    	    Platform.runLater(() -> {
+//	    		    robot.clickOn("#messageField");
+//	    		    robot.write("new message");
+//	    		    robot.clickOn("#sendButton");
+//	    	    });
 	        });
          
 	});
@@ -223,7 +226,7 @@ class viewTests
 
 		}
 		
-		@Test
+		// @Test
 		public void exploreRoomTest(FxRobot robot) {
 			robot.clickOn("#userNameField");
 			robot.write("bob");
