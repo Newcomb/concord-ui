@@ -42,6 +42,7 @@ public class UsersListViewController extends BaseController implements Initializ
     	}
     	if (type.equals("DM") && current != null) {
     		client.createDirectMessage(current.getUserID());
+    		client.initializeDMData();
     	}
     }
 

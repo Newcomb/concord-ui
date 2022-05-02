@@ -131,7 +131,7 @@ class JVMServerTest
 		assertEquals(c.setRoomLogo(0, "New Logo"), false);
 		
 		// CHeck that you cant set room type
-		assertEquals(c.setRoomType(false, 0), false);
+		// assertEquals(c.setRoomType(false, 0), false);
 		
 		// Check that you cant give role before log in
 		assertEquals(c.giveRole(1, 0, new Moderator()), false);
@@ -299,11 +299,17 @@ class JVMServerTest
 		// Check that you cant add room if you are in the room
 		assertEquals(c.addUserToRoom(0, 0), false);
 		
+		
+		// Check that you cant add room if you are already in it
+				assertEquals(c2.addUserToRoom(0, 0), false);
+		
+		
 		// CHeck that you cant invite usre to room before auth
 		assertEquals(c.inviteUserToRoom(1, 0), true);
 		
 		// Check that if you are invited you can add a room
-		assertEquals(c2.addUserToRoom(1, 1), true);
+		// assertEquals(c2.addUserToRoom(1, 1), true);
+		
 	
 		// Check that you cant remove people if you arent admin
 		assertEquals(c2.removeUserFromRoom(0, 0), false);
@@ -314,6 +320,8 @@ class JVMServerTest
 		// Check that you can remove people if you are admin
 		assertEquals(c.removeUserFromRoom(1, 0), true);
 		
+		
+		
 		System.out.println("Below");
 		System.out.println(bob.getRooms());
 		
@@ -321,7 +329,7 @@ class JVMServerTest
 		assertEquals(c.getRoom(0).getUserTable().containsKey(1), false);
 		
 		// Add user back
-		assertEquals(c.addUserToRoom(1, 0), true);
+		assertEquals(c2.addRoom(0), true);
 		
 		// Check that user can remove themselves from room
 		assertEquals(c2.removeUserFromRoom(1, 0), true);
@@ -330,7 +338,7 @@ class JVMServerTest
 		assertEquals(c2.getAllRooms().getRoom(0).getUserTable().containsKey(1), false);
 				
 		// Add user back
-		assertEquals(c.addUserToRoom(1, 0), true);
+		assertEquals(c2.addRoom(0), true);
 		
 		// Check that user has room
 		assertEquals(c.getAllRooms().getRoom(0).getUserTable().containsKey(1), true);

@@ -3,7 +3,7 @@
  <object class="model.JVMServer" id="JVMServer0">
   <void id="UserList0" property="ul">
    <void property="userTracker">
-    <int>4</int>
+    <int>3</int>
    </void>
    <void property="users">
     <void method="put">
@@ -48,7 +48,7 @@
        <string>profileData</string>
        <void method="set">
         <object idref="User0"/>
-        <string>I am a new description</string>
+        <string>I like cats</string>
        </void>
       </void>
      </object>
@@ -147,92 +147,273 @@
       </void>
      </object>
     </void>
-    <void method="put">
-     <int>3</int>
-     <object class="model.User" id="User3">
-      <void class="model.User" method="getField">
-       <string>username</string>
-       <void method="set">
-        <object idref="User3"/>
-        <string>jen</string>
-       </void>
-      </void>
-      <void class="model.User" method="getField">
-       <string>password</string>
-       <void method="set">
-        <object idref="User3"/>
-        <string>jennyRocks</string>
-       </void>
-      </void>
-      <void class="model.User" method="getField">
-       <string>realName</string>
-       <void method="set">
-        <object idref="User3"/>
-        <string>jenny</string>
-       </void>
-      </void>
-      <void class="model.User" method="getField">
-       <string>userID</string>
-       <void method="set">
-        <object idref="User3"/>
-        <int>3</int>
-       </void>
-      </void>
-      <void class="model.User" method="getField">
-       <string>profilePic</string>
-       <void method="set">
-        <object idref="User3"/>
-        <string>twoCat.jpg</string>
-       </void>
-      </void>
-      <void class="model.User" method="getField">
-       <string>status</string>
-       <void method="set">
-        <object idref="User3"/>
-        <boolean>true</boolean>
-       </void>
-      </void>
-      <void class="model.User" method="getField">
-       <string>profileData</string>
-       <void method="set">
-        <object idref="User3"/>
-        <string>I am jenny!</string>
-       </void>
-      </void>
-     </object>
-    </void>
    </void>
   </void>
  </object>
-<void class="model.Room" id="Field0" method="getField">
- <string>userInvites</string>
+<void class="model.ChatLog" id="Field0" method="getField">
+ <string>chat</string>
  <void id="HashMap0" method="get">
-  <object class="model.Room" id="Room0">
-   <void class="model.Room" method="getField">
-    <string>chatLogTracker</string>
+  <object class="model.ChatLog" id="ChatLog0">
+   <void class="model.ChatLog" method="getField">
+    <string>chatLogName</string>
     <void method="set">
-     <object idref="Room0"/>
+     <object idref="ChatLog0"/>
+     <string>Gaming</string>
+    </void>
+   </void>
+   <void class="model.ChatLog" method="getField">
+    <string>chatTracker</string>
+    <void method="set">
+     <object idref="ChatLog0"/>
+     <int>4</int>
+    </void>
+   </void>
+   <void class="model.ChatLog" method="getField">
+    <string>locked</string>
+    <void method="set">
+     <object idref="ChatLog0"/>
+     <boolean>true</boolean>
+    </void>
+   </void>
+  </object>
+  <void method="put">
+   <int>1</int>
+   <object class="model.Chat" id="Chat0">
+    <void class="model.Chat" method="getField">
+     <string>message</string>
+     <void method="set">
+      <object idref="Chat0"/>
+      <string>New Chat</string>
+     </void>
+    </void>
+    <void class="model.Chat" method="getField">
+     <string>deleted</string>
+     <void method="set">
+      <object idref="Chat0"/>
+      <boolean>true</boolean>
+     </void>
+    </void>
+    <void class="model.Chat" method="getField">
+     <string>replyToID</string>
+     <void method="set">
+      <object idref="Chat0"/>
+      <int>-1</int>
+     </void>
+    </void>
+    <void property="chatID">
+     <int>1</int>
+    </void>
+    <void property="pinned">
+     <boolean>true</boolean>
+    </void>
+    <void property="timeStamp">
+     <object class="java.util.Date">
+      <long>1651534825775</long>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <int>2</int>
+   <object class="model.Chat" id="Chat1">
+    <void class="model.Chat" method="getField">
+     <string>message</string>
+     <void method="set">
+      <object idref="Chat1"/>
+      <string>I love it!</string>
+     </void>
+    </void>
+    <void class="model.Chat" method="getField">
+     <string>deleted</string>
+     <void method="set">
+      <object idref="Chat1"/>
+      <boolean>false</boolean>
+     </void>
+    </void>
+    <void class="model.Chat" method="getField">
+     <string>replyToID</string>
+     <void method="set">
+      <object idref="Chat1"/>
+      <int>1</int>
+     </void>
+    </void>
+    <void property="chatID">
      <int>2</int>
     </void>
-   </void>
-   <void class="model.Room" method="getField">
-    <string>description</string>
-    <void method="set">
-     <object idref="Room0"/>
-     <string>This room is for data science majors!</string>
+    <void property="pinned">
+     <boolean>false</boolean>
     </void>
-   </void>
+    <void property="senderID">
+     <int>1</int>
+    </void>
+    <void property="timeStamp">
+     <object class="java.util.Date">
+      <long>1651534826085</long>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <int>3</int>
+   <object class="model.Chat" id="Chat2">
+    <void class="model.Chat" method="getField">
+     <string>message</string>
+     <void method="set">
+      <object idref="Chat2"/>
+      <string>Hello</string>
+     </void>
+    </void>
+    <void class="model.Chat" method="getField">
+     <string>deleted</string>
+     <void method="set">
+      <object idref="Chat2"/>
+      <boolean>true</boolean>
+     </void>
+    </void>
+    <void class="model.Chat" method="getField">
+     <string>replyToID</string>
+     <void method="set">
+      <object idref="Chat2"/>
+      <int>-1</int>
+     </void>
+    </void>
+    <void property="chatID">
+     <int>3</int>
+    </void>
+    <void property="pinned">
+     <boolean>false</boolean>
+    </void>
+    <void property="timeStamp">
+     <object class="java.util.Date">
+      <long>1651534826231</long>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <int>0</int>
+   <object class="model.Chat" id="Chat3">
+    <void class="model.Chat" method="getField">
+     <string>message</string>
+     <void method="set">
+      <object idref="Chat3"/>
+      <string>Hello!</string>
+     </void>
+    </void>
+    <void class="model.Chat" method="getField">
+     <string>deleted</string>
+     <void method="set">
+      <object idref="Chat3"/>
+      <boolean>true</boolean>
+     </void>
+    </void>
+    <void class="model.Chat" method="getField">
+     <string>replyToID</string>
+     <void method="set">
+      <object idref="Chat3"/>
+      <int>-1</int>
+     </void>
+    </void>
+    <void property="pinned">
+     <boolean>false</boolean>
+    </void>
+    <void property="timeStamp">
+     <object class="java.util.Date">
+      <long>1651534825356</long>
+     </object>
+    </void>
+   </object>
+  </void>
+ </void>
+</void>
+<void idref="HashMap0"/>
+<void class="model.Room" method="getField">
+ <string>description</string>
+ <void method="set">
+  <object class="model.Room" id="Room0">
    <void class="model.Room" method="getField">
     <string>logo</string>
     <void method="set">
      <object idref="Room0"/>
-     <string>GO DS!</string>
+     <string>ILD</string>
+    </void>
+   </void>
+   <void class="model.Room" method="getField">
+    <string>RoomID</string>
+    <void method="set">
+     <object idref="Room0"/>
+     <int>4</int>
     </void>
    </void>
    <void class="model.Room" method="getField">
     <string>type</string>
     <void method="set">
      <object idref="Room0"/>
+     <boolean>true</boolean>
+    </void>
+   </void>
+  </object>
+  <string>Hello</string>
+ </void>
+</void>
+<void class="model.Room" method="getField">
+ <string>description</string>
+ <void method="set">
+  <object class="model.Room" id="Room1">
+   <void class="model.Room" method="getField">
+    <string>logo</string>
+    <void method="set">
+     <object idref="Room1"/>
+     <string>Bobs room</string>
+    </void>
+   </void>
+   <void class="model.Room" method="getField">
+    <string>RoomID</string>
+    <void method="set">
+     <object idref="Room1"/>
+     <int>1</int>
+    </void>
+   </void>
+   <void class="model.Room" method="getField">
+    <string>type</string>
+    <void method="set">
+     <object idref="Room1"/>
+     <boolean>true</boolean>
+    </void>
+   </void>
+  </object>
+  <string>Better Desc</string>
+ </void>
+</void>
+<void class="model.Room" id="Field1" method="getField">
+ <string>userInvites</string>
+ <void id="HashMap1" method="get">
+  <object class="model.Room" id="Room2">
+   <void class="model.Room" method="getField">
+    <string>chatLogTracker</string>
+    <void method="set">
+     <object idref="Room2"/>
+     <int>2</int>
+    </void>
+   </void>
+   <void class="model.Room" method="getField">
+    <string>description</string>
+    <void method="set">
+     <object idref="Room2"/>
+     <string>This room is for data science majors!</string>
+    </void>
+   </void>
+   <void class="model.Room" method="getField">
+    <string>logo</string>
+    <void method="set">
+     <object idref="Room2"/>
+     <string>GO DS!</string>
+    </void>
+   </void>
+   <void class="model.Room" method="getField">
+    <string>type</string>
+    <void method="set">
+     <object idref="Room2"/>
      <boolean>true</boolean>
     </void>
    </void>
@@ -247,175 +428,7 @@
   </void>
  </void>
 </void>
-<void idref="HashMap0"/>
-<void class="model.Room" method="getField">
- <string>description</string>
- <void method="set">
-  <object class="model.Room" id="Room1">
-   <void class="model.Room" method="getField">
-    <string>logo</string>
-    <void method="set">
-     <object idref="Room1"/>
-     <string>New Room</string>
-    </void>
-   </void>
-   <void class="model.Room" method="getField">
-    <string>RoomID</string>
-    <void method="set">
-     <object idref="Room1"/>
-     <int>5</int>
-    </void>
-   </void>
-   <void class="model.Room" method="getField">
-    <string>type</string>
-    <void method="set">
-     <object idref="Room1"/>
-     <boolean>true</boolean>
-    </void>
-   </void>
-  </object>
-  <string>best room</string>
- </void>
-</void>
-<void class="model.Room" id="Field1" method="getField">
- <string>userTable</string>
- <void id="HashMap1" method="get">
-  <object class="model.Room" id="Room2">
-   <void class="model.Room" method="getField">
-    <string>description</string>
-    <void method="set">
-     <object idref="Room2"/>
-     <string>Hello</string>
-    </void>
-   </void>
-   <void class="model.Room" method="getField">
-    <string>logo</string>
-    <void method="set">
-     <object idref="Room2"/>
-     <string>ILC</string>
-    </void>
-   </void>
-   <void class="model.Room" method="getField">
-    <string>RoomID</string>
-    <void method="set">
-     <object idref="Room2"/>
-     <int>3</int>
-    </void>
-   </void>
-   <void class="model.Room" method="getField">
-    <string>type</string>
-    <void method="set">
-     <object idref="Room2"/>
-     <boolean>true</boolean>
-    </void>
-   </void>
-  </object>
-  <void method="put">
-   <int>1</int>
-   <object class="model.Admin"/>
-  </void>
- </void>
-</void>
 <void idref="HashMap1"/>
-<void class="model.Chat" method="getField">
- <string>message</string>
- <void method="set">
-  <object class="model.Chat" id="Chat0">
-   <void class="model.Chat" method="getField">
-    <string>deleted</string>
-    <void method="set">
-     <object idref="Chat0"/>
-     <boolean>true</boolean>
-    </void>
-   </void>
-   <void class="model.Chat" method="getField">
-    <string>replyToID</string>
-    <void method="set">
-     <object idref="Chat0"/>
-     <int>-1</int>
-    </void>
-   </void>
-   <void property="chatID">
-    <int>1</int>
-   </void>
-   <void property="pinned">
-    <boolean>true</boolean>
-   </void>
-   <void property="timeStamp">
-    <object class="java.util.Date">
-     <long>1651467625374</long>
-    </object>
-   </void>
-  </object>
-  <string>New Chat</string>
- </void>
-</void>
-<void class="model.Chat" method="getField">
- <string>message</string>
- <void method="set">
-  <object class="model.Chat" id="Chat1">
-   <void class="model.Chat" method="getField">
-    <string>deleted</string>
-    <void method="set">
-     <object idref="Chat1"/>
-     <boolean>true</boolean>
-    </void>
-   </void>
-   <void class="model.Chat" method="getField">
-    <string>replyToID</string>
-    <void method="set">
-     <object idref="Chat1"/>
-     <int>-1</int>
-    </void>
-   </void>
-   <void property="pinned">
-    <boolean>false</boolean>
-   </void>
-   <void property="timeStamp">
-    <object class="java.util.Date">
-     <long>1651467625033</long>
-    </object>
-   </void>
-  </object>
-  <string>Hello!</string>
- </void>
-</void>
-<void class="model.Chat" method="getField">
- <string>message</string>
- <void method="set">
-  <object class="model.Chat" id="Chat2">
-   <void class="model.Chat" method="getField">
-    <string>deleted</string>
-    <void method="set">
-     <object idref="Chat2"/>
-     <boolean>false</boolean>
-    </void>
-   </void>
-   <void class="model.Chat" method="getField">
-    <string>replyToID</string>
-    <void method="set">
-     <object idref="Chat2"/>
-     <int>1</int>
-    </void>
-   </void>
-   <void property="chatID">
-    <int>2</int>
-   </void>
-   <void property="pinned">
-    <boolean>false</boolean>
-   </void>
-   <void property="senderID">
-    <int>1</int>
-   </void>
-   <void property="timeStamp">
-    <object class="java.util.Date">
-     <long>1651467625634</long>
-    </object>
-   </void>
-  </object>
-  <string>I love it!</string>
- </void>
-</void>
 <void class="model.RoomList" id="Field2" method="getField">
  <string>rooms</string>
  <void id="HashMap2" method="get">
@@ -427,7 +440,7 @@
      <string>roomTracker</string>
      <void method="set">
       <object idref="RoomList0"/>
-      <int>6</int>
+      <int>5</int>
      </void>
     </void>
    </void>
@@ -435,72 +448,43 @@
   <object idref="RoomList0"/>
   <void method="put">
    <int>1</int>
-   <object class="model.Room" id="Room3">
-    <void class="model.Room" method="getField">
-     <string>description</string>
-     <void method="set">
-      <object idref="Room3"/>
-      <string>Better Desc</string>
-     </void>
-    </void>
-    <void class="model.Room" method="getField">
-     <string>logo</string>
-     <void method="set">
-      <object idref="Room3"/>
-      <string>Bobs room</string>
-     </void>
-    </void>
-    <void class="model.Room" method="getField">
-     <string>RoomID</string>
-     <void method="set">
-      <object idref="Room3"/>
-      <int>1</int>
-     </void>
-    </void>
-    <void class="model.Room" method="getField">
-     <string>type</string>
-     <void method="set">
-      <object idref="Room3"/>
-      <boolean>true</boolean>
-     </void>
-    </void>
-   </object>
+   <object idref="Room1"/>
   </void>
   <void method="put">
    <int>2</int>
-   <object class="model.Room" id="Room4">
+   <object class="model.Room" id="Room3">
     <void class="model.Room" method="getField">
      <string>chatLogTracker</string>
      <void method="set">
-      <object idref="Room4"/>
+      <object idref="Room3"/>
       <int>2</int>
      </void>
     </void>
     <void class="model.Room" method="getField">
      <string>description</string>
      <void method="set">
-      <object idref="Room4"/>
+      <object idref="Room3"/>
       <string>Direct Message</string>
      </void>
     </void>
     <void class="model.Room" method="getField">
      <string>logo</string>
      <void method="set">
-      <object idref="Room4"/>
+      <object idref="Room3"/>
       <string>janice + bob</string>
      </void>
     </void>
     <void class="model.Room" method="getField">
      <string>RoomID</string>
      <void method="set">
-      <object idref="Room4"/>
+      <object idref="Room3"/>
       <int>2</int>
      </void>
     </void>
     <void class="model.Room" method="getField">
      <string>type</string>
      <void method="set">
-      <object idref="Room4"/>
+      <object idref="Room3"/>
       <boolean>false</boolean>
      </void>
     </void>
@@ -508,108 +492,207 @@
   </void>
   <void method="put">
    <int>3</int>
-   <object idref="Room2"/>
-  </void>
-  <void method="put">
-   <int>4</int>
-   <object class="model.Room" id="Room5">
+   <object class="model.Room" id="Room4">
     <void class="model.Room" method="getField">
      <string>description</string>
      <void method="set">
-      <object idref="Room5"/>
+      <object idref="Room4"/>
       <string>Hello</string>
      </void>
     </void>
     <void class="model.Room" method="getField">
      <string>logo</string>
      <void method="set">
-      <object idref="Room5"/>
-      <string>ILD</string>
+      <object idref="Room4"/>
+      <string>ILC</string>
      </void>
     </void>
     <void class="model.Room" method="getField">
      <string>RoomID</string>
      <void method="set">
-      <object idref="Room5"/>
-      <int>4</int>
+      <object idref="Room4"/>
+      <int>3</int>
      </void>
     </void>
     <void class="model.Room" method="getField">
      <string>type</string>
      <void method="set">
-      <object idref="Room5"/>
+      <object idref="Room4"/>
       <boolean>true</boolean>
      </void>
     </void>
    </object>
   </void>
   <void method="put">
-   <int>5</int>
-   <object idref="Room1"/>
+   <int>4</int>
+   <object idref="Room0"/>
   </void>
   <void method="put">
    <int>0</int>
-   <object idref="Room0"/>
+   <object idref="Room2"/>
   </void>
  </void>
 </void>
 <void idref="HashMap2"/>
-<void class="model.Room" id="Field4" method="getField">
+<void class="model.ChatLog" method="getField">
+ <string>chatLogID</string>
+ <void method="set">
+  <object class="model.ChatLog" id="ChatLog1">
+   <void class="model.ChatLog" method="getField">
+    <string>chatLogName</string>
+    <void method="set">
+     <object idref="ChatLog1"/>
+     <string>New DM</string>
+    </void>
+   </void>
+   <void class="model.ChatLog" method="getField">
+    <string>locked</string>
+    <void method="set">
+     <object idref="ChatLog1"/>
+     <boolean>false</boolean>
+    </void>
+   </void>
+  </object>
+  <int>1</int>
+ </void>
+</void>
+<void class="model.User" id="Field4" method="getField">
+ <string>rooms</string>
+ <void id="ArrayList0" method="get">
+  <object idref="User0"/>
+  <void method="add">
+   <int>1</int>
+  </void>
+  <void method="add">
+   <int>0</int>
+  </void>
+ </void>
+</void>
+<void idref="ArrayList0"/>
+<void class="model.Room" id="Field5" method="getField">
  <string>chatLogs</string>
  <void id="HashMap3" method="get">
-  <object idref="Room4"/>
-  <void method="put">
-   <int>1</int>
-   <object class="model.ChatLog" id="ChatLog0">
-    <void class="model.ChatLog" method="getField">
-     <string>chatLogID</string>
-     <void method="set">
-      <object idref="ChatLog0"/>
-      <int>1</int>
-     </void>
-    </void>
-    <void class="model.ChatLog" method="getField">
-     <string>chatLogName</string>
-     <void method="set">
-      <object idref="ChatLog0"/>
-      <string>New DM</string>
-     </void>
-    </void>
-    <void class="model.ChatLog" method="getField">
-     <string>locked</string>
-     <void method="set">
-      <object idref="ChatLog0"/>
-      <boolean>false</boolean>
-     </void>
-    </void>
-   </object>
-  </void>
+  <object idref="Room2"/>
   <void method="put">
    <int>0</int>
-   <object class="model.ChatLog" id="ChatLog1">
-    <void class="model.ChatLog" method="getField">
-     <string>chatLogName</string>
-     <void method="set">
-      <object idref="ChatLog1"/>
-      <string>New DM</string>
-     </void>
-    </void>
-    <void class="model.ChatLog" method="getField">
-     <string>locked</string>
-     <void method="set">
-      <object idref="ChatLog1"/>
-      <boolean>false</boolean>
-     </void>
-    </void>
-   </object>
+   <object idref="ChatLog0"/>
   </void>
  </void>
 </void>
 <void idref="HashMap3"/>
-<void class="model.Room" id="Field5" method="getField">
- <string>userTable</string>
+<void class="model.ChatLog" method="getField">
+ <string>chatLogName</string>
+ <void method="set">
+  <object class="model.ChatLog" id="ChatLog2">
+   <void class="model.ChatLog" method="getField">
+    <string>locked</string>
+    <void method="set">
+     <object idref="ChatLog2"/>
+     <boolean>false</boolean>
+    </void>
+   </void>
+  </object>
+  <string>New DM</string>
+ </void>
+</void>
+<void class="model.User" id="Field6" method="getField">
+ <string>directMessages</string>
+ <void id="ArrayList1" method="get">
+  <object idref="User0"/>
+  <void method="add">
+   <int>2</int>
+  </void>
+  <void method="add">
+   <int>-1</int>
+  </void>
+ </void>
+</void>
+<void idref="ArrayList1"/>
+<void class="model.Room" id="Field7" method="getField">
+ <string>chatLogs</string>
  <void id="HashMap4" method="get">
   <object idref="Room3"/>
+  <void method="put">
+   <int>1</int>
+   <object idref="ChatLog1"/>
+  </void>
+  <void method="put">
+   <int>0</int>
+   <object idref="ChatLog2"/>
+  </void>
+ </void>
+</void>
+<void idref="HashMap4"/>
+<void class="model.User" id="Field8" method="getField">
+ <string>rooms</string>
+ <void id="ArrayList2" method="get">
+  <object idref="User1"/>
+  <void method="add">
+   <int>4</int>
+  </void>
+  <void method="add">
+   <int>0</int>
+  </void>
+  <void method="add">
+   <int>3</int>
+  </void>
+ </void>
+</void>
+<void idref="ArrayList2"/>
+<void class="model.Room" id="Field9" method="getField">
+ <string>userTable</string>
+ <void id="HashMap5" method="get">
+  <object idref="Room0"/>
+  <void method="put">
+   <int>1</int>
+   <object class="model.Admin"/>
+  </void>
+ </void>
+</void>
+<void idref="HashMap5"/>
+<void class="model.User" id="Field10" method="getField">
+ <string>directMessages</string>
+ <void id="ArrayList3" method="get">
+  <object idref="User1"/>
+  <void method="add">
+   <int>2</int>
+  </void>
+  <void method="add">
+   <int>-1</int>
+  </void>
+ </void>
+</void>
+<void idref="ArrayList3"/>
+<void class="model.Room" id="Field11" method="getField">
+ <string>userTable</string>
+ <void id="HashMap6" method="get">
+  <object idref="Room3"/>
+  <void method="put">
+   <int>1</int>
+   <object class="model.Admin"/>
+  </void>
+  <void method="put">
+   <int>0</int>
+   <object class="model.Admin"/>
+  </void>
+ </void>
+</void>
+<void idref="HashMap6"/>
+<void class="model.Room" id="Field12" method="getField">
+ <string>userTable</string>
+ <void id="HashMap7" method="get">
+  <object idref="Room4"/>
+  <void method="put">
+   <int>1</int>
+   <object class="model.Admin"/>
+  </void>
+ </void>
+</void>
+<void idref="HashMap7"/>
+<void class="model.Room" id="Field13" method="getField">
+ <string>userTable</string>
+ <void id="HashMap8" method="get">
+  <object idref="Room2"/>
   <void method="put">
    <int>1</int>
    <object class="model.Noob"/>
@@ -620,103 +703,10 @@
   </void>
  </void>
 </void>
-<void idref="HashMap4"/>
-<void class="model.Chat" method="getField">
- <string>message</string>
- <void method="set">
-  <object class="model.Chat" id="Chat3">
-   <void class="model.Chat" method="getField">
-    <string>deleted</string>
-    <void method="set">
-     <object idref="Chat3"/>
-     <boolean>true</boolean>
-    </void>
-   </void>
-   <void class="model.Chat" method="getField">
-    <string>replyToID</string>
-    <void method="set">
-     <object idref="Chat3"/>
-     <int>-1</int>
-    </void>
-   </void>
-   <void property="chatID">
-    <int>3</int>
-   </void>
-   <void property="pinned">
-    <boolean>false</boolean>
-   </void>
-   <void property="timeStamp">
-    <object class="java.util.Date">
-     <long>1651467625808</long>
-    </object>
-   </void>
-  </object>
-  <string>Hello</string>
- </void>
-</void>
-<void class="model.ChatLog" method="getField">
- <string>chatLogName</string>
- <void method="set">
-  <object class="model.ChatLog" id="ChatLog2">
-   <void class="model.ChatLog" method="getField">
-    <string>chatTracker</string>
-    <void method="set">
-     <object idref="ChatLog2"/>
-     <int>4</int>
-    </void>
-   </void>
-   <void class="model.ChatLog" method="getField">
-    <string>locked</string>
-    <void method="set">
-     <object idref="ChatLog2"/>
-     <boolean>true</boolean>
-    </void>
-   </void>
-  </object>
-  <string>Gaming</string>
- </void>
-</void>
-<void class="model.Room" id="Field6" method="getField">
+<void idref="HashMap8"/>
+<void class="model.Room" id="Field14" method="getField">
  <string>userTable</string>
- <void id="HashMap5" method="get">
-  <object idref="Room4"/>
-  <void method="put">
-   <int>1</int>
-   <object class="model.Admin"/>
-  </void>
-  <void method="put">
-   <int>0</int>
-   <object class="model.Admin"/>
-  </void>
- </void>
-</void>
-<void idref="HashMap5"/>
-<void class="model.ChatLog" id="Field7" method="getField">
- <string>chat</string>
- <void id="HashMap6" method="get">
-  <object idref="ChatLog2"/>
-  <void method="put">
-   <int>1</int>
-   <object idref="Chat0"/>
-  </void>
-  <void method="put">
-   <int>2</int>
-   <object idref="Chat2"/>
-  </void>
-  <void method="put">
-   <int>3</int>
-   <object idref="Chat3"/>
-  </void>
-  <void method="put">
-   <int>0</int>
-   <object idref="Chat1"/>
-  </void>
- </void>
-</void>
-<void idref="HashMap6"/>
-<void class="model.Room" id="Field8" method="getField">
- <string>userTable</string>
- <void id="HashMap7" method="get">
+ <void id="HashMap9" method="get">
   <object idref="Room1"/>
   <void method="put">
    <int>0</int>
@@ -724,97 +714,5 @@
   </void>
  </void>
 </void>
-<void idref="HashMap7"/>
-<void class="model.User" id="Field9" method="getField">
- <string>directMessages</string>
- <void id="ArrayList0" method="get">
-  <object idref="User0"/>
-  <void method="add">
-   <int>2</int>
-  </void>
-  <void method="add">
-   <int>-1</int>
-  </void>
- </void>
-</void>
-<void idref="ArrayList0"/>
-<void class="model.Room" id="Field10" method="getField">
- <string>userTable</string>
- <void id="HashMap8" method="get">
-  <object idref="Room0"/>
-  <void method="put">
-   <int>1</int>
-   <object class="model.Admin"/>
-  </void>
-  <void method="put">
-   <int>0</int>
-   <object class="model.Admin"/>
-  </void>
- </void>
-</void>
-<void idref="HashMap8"/>
-<void class="model.User" id="Field11" method="getField">
- <string>directMessages</string>
- <void id="ArrayList1" method="get">
-  <object idref="User1"/>
-  <void method="add">
-   <int>2</int>
-  </void>
-  <void method="add">
-   <int>-1</int>
-  </void>
- </void>
-</void>
-<void idref="ArrayList1"/>
-<void class="model.User" id="Field12" method="getField">
- <string>rooms</string>
- <void id="ArrayList2" method="get">
-  <object idref="User0"/>
-  <void method="add">
-   <int>1</int>
-  </void>
-  <void method="add">
-   <int>5</int>
-  </void>
-  <void method="add">
-   <int>0</int>
-  </void>
- </void>
-</void>
-<void idref="ArrayList2"/>
-<void class="model.Room" id="Field13" method="getField">
- <string>chatLogs</string>
- <void id="HashMap9" method="get">
-  <object idref="Room0"/>
-  <void method="put">
-   <int>0</int>
-   <object idref="ChatLog2"/>
-  </void>
- </void>
-</void>
 <void idref="HashMap9"/>
-<void class="model.Room" id="Field14" method="getField">
- <string>userTable</string>
- <void id="HashMap10" method="get">
-  <object idref="Room5"/>
-  <void method="put">
-   <int>1</int>
-   <object class="model.Admin"/>
-  </void>
- </void>
-</void>
-<void idref="HashMap10"/>
-<void class="model.User" id="Field15" method="getField">
- <string>rooms</string>
- <void id="ArrayList3" method="get">
-  <object idref="User1"/>
-  <void method="add">
-   <int>4</int>
-  </void>
-  <void method="add">
-   <int>3</int>
-  </void>
- </void>
-</void>
-<void idref="ArrayList3"/>
 </java>

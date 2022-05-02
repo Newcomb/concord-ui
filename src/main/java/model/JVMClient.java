@@ -96,7 +96,7 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 		List<Room> rooms = new ArrayList<>() {{
 		Room r;
 		for (Integer roomID : serv.getRl().getRooms().keySet()) {
-			r = rl.getRoom(roomID);
+			r = serv.getRl().getRoom(roomID);
 			if (!r.getUserTable().containsKey(u.getUserID()) && (r.getInviteStatus(u.getUserID()) || r.getType())) {
 				add(r);
 			}
@@ -110,19 +110,12 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 		
         List<User> userNames = new ArrayList<>() {{
         	if (selectedRoomObject != null) {
-        	Room r = null;
-        	for (Integer roomID : u.getRooms())
-        	{
-        		if (rl.getRoom(roomID).getLogo().equals(selectedRoomObject.getLogo())) {
-        			r = rl.getRoom(roomID);
-
-        		}
-        	}
-        	if (r != null) {
-			for (Integer userID : r.getUserTable().keySet()) {
+        		System.out.println(selectedRoomObject.toString());
+        		selectedRoomObject = serv.getRoom(selectedRoomObject.getRoomID());
+			for (Integer userID : selectedRoomObject.getUserTable().keySet()) {
 				add(serv.getUl().getUser(userID));
 			}
-        	}
+        	
         	}
         }};
         this.userNames.clear();
@@ -182,14 +175,14 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 
     }
     
-    public void initializeDMData() {
+    public void initializeDMData() throws RemoteException {
 
         List<Room> dms = new ArrayList<>() {{
         	for (Integer roomID : u.getDirectMessages())
         	{
         		
-        			if (rl.getRoom(roomID) != null) {
-        				add(rl.getRoom(roomID));
+        			if (serv.getRl().getRoom(roomID) != null) {
+        				add(serv.getRl().getRoom(roomID));
         			}
         		
         	}
@@ -294,7 +287,9 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 	{
 		if (u != null)
 		{
+			System.out.println("one");
 			if (!u.getRooms().contains(roomID)) {
+				System.out.println("one");
 			u.addRoom(roomID, serv.getRl());
 			notifyServer();
 			serv.addUserToRoom(u.getUserID(), roomID);
@@ -368,6 +363,7 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 		if (u != null)
 		{
 			if (serv.removeUserFromRoom(removeID, u.getUserID(), roomID)){
+				u.removeRoom(roomID);
 				return true;
 			}
 		}

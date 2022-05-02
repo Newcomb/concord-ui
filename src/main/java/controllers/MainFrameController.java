@@ -59,7 +59,7 @@ public class MainFrameController extends BaseController implements Initializable
     }
 
     @FXML
-    void onDMButtonClicked(ActionEvent event) {
+    void onDMButtonClicked(ActionEvent event) throws RemoteException {
     	client.initializeDMData();
         viewFactory.showDmView();
         /*TODO: Clear selection */

@@ -23,7 +23,7 @@ public class ExploreViewController extends BaseController implements Initializab
 	private Button cancelButton;
 	
     @FXML
-    private ListView<Room> roomList;
+    private ListView<Room> exploreList;
 
     public ExploreViewController(JVMClient client, ViewFactory viewFactory, String fxmlName) {
         super(client, viewFactory, fxmlName);
@@ -41,9 +41,9 @@ public class ExploreViewController extends BaseController implements Initializab
 			e.printStackTrace();
 		}
 
-    	roomList.setItems(client.exploreRooms);
+    	exploreList.setItems(client.exploreRooms);
     	
-        roomList.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+        exploreList.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             System.out.println("Item selected");
             r = newValue;
         });
@@ -52,13 +52,15 @@ public class ExploreViewController extends BaseController implements Initializab
 
     @FXML
     void onAddButtonClicked(ActionEvent event) throws RemoteException {
+    	if (r != null) {
     	client.addRoom(r.getRoomID());
     	client.initializeRoomData();
-        viewFactory.closeStageFromNode(roomList);
+        viewFactory.closeStageFromNode(exploreList);
+    	}
     }
 
     @FXML
     void onCancelButtonClicked(ActionEvent event) {
-        viewFactory.closeStageFromNode(roomList);
+        viewFactory.closeStageFromNode(exploreList);
     }
 }

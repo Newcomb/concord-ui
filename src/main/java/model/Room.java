@@ -119,11 +119,15 @@ public class Room implements Serializable
 		 */
 		public Boolean removeUser(int removeID, int userID)
 		{
+			System.out.println("Start");
 			if (userTable.containsKey(removeID))
 			{
 			if ((userTable.get(userID).getRemoveUserPermission() || (removeID == userID)) && !userTable.get(removeID).getRoleName().equals("Admin"))
 			{
-					userTable.remove(removeID);
+				    System.out.println("removed");
+					if (userTable.remove(removeID) != null) {
+						System.out.println("Success");
+					}
 					return true;
 			}
 			}

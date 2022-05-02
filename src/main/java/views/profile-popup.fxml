@@ -22,6 +22,6 @@
       <Button fx:id="makeModeratorButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnMakeModeratorButtonClicked" text="Make Moderator" />
       <Button fx:id="makeNoobButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnClickMakeNoobButton" text="Make Noob" />
       <Button fx:id="kickButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnKickButtonClicked" text="Kick" />
-      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnCloseButtonClicked" text="Close" />
+      <Button fx:id="cancelButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnCloseButtonClicked" text="Close" />
    </children>
 </VBox>

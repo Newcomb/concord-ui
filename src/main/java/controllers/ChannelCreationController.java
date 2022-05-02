@@ -31,6 +31,12 @@ public class ChannelCreationController extends BaseController
     @FXML
     private Text statusWarning;
     
+    @FXML
+    private Button cancelButton;
+    
+   @FXML
+   private Button submitChannelButton;
+    
 
 
 

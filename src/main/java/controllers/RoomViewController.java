@@ -24,7 +24,7 @@ public class RoomViewController extends BaseController implements Initializable 
     private ListView<ChatLog> channelList;
 
     @FXML
-    private ListView<Chat> chatList;
+    private ListView<Chat> roomChatList;
 
     @FXML
     private ListView<User> userList;
@@ -46,6 +46,9 @@ public class RoomViewController extends BaseController implements Initializable 
     
     @FXML
     private Button sendButton;
+
+    @FXML
+    private Button newChannelButton;
     
     
 
@@ -82,8 +85,7 @@ public class RoomViewController extends BaseController implements Initializable 
     		client.addChat(client.selectedChatLogObject.getChatLogID(), client.selectedRoomObject.getRoomID(), messageField.getText());
     		messageField.clear();
     		client.initializeChatData();
-    		chatList.setItems(client.chats);
-    		chatList.refresh();
+    		// chatList.setItems(client.chats);
     	}
 
     	
@@ -123,16 +125,16 @@ public class RoomViewController extends BaseController implements Initializable 
         	if (newValue != null) {
         	client.selectedChatLogObject = newValue;
         	client.initializeChatData();
-        	chatList.setItems(client.chats);
+        	roomChatList.setItems(client.chats);
         	}
         });
         
         
-        chatList.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+        roomChatList.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
         	if (newValue != null) {
         		client.selectedChatObject = newValue;
             // not working at the moment
-        		viewFactory.showChatPopup();
+        		// viewFactory.showChatPopup();
         	}
         });
         

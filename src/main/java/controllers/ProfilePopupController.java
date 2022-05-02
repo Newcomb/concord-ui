@@ -33,6 +33,9 @@ public class ProfilePopupController extends BaseController implements Initializa
     
     @FXML
     private Button kickButton;
+    
+    @FXML
+    private Button cancelButton;
 
 
     User userName;
@@ -65,10 +68,10 @@ public class ProfilePopupController extends BaseController implements Initializa
     @FXML
     void OnKickButtonClicked(ActionEvent event) throws RemoteException {
     	client.removeUserFromRoom(userName.getUserID(), client.selectedRoomObject.getRoomID());
-    	client.initializeUsersData();
     	if (userName.getUserID() == client.getU().getUserID()){
     		client.initializeRoomData();
     	}
+    	client.initializeUsersData();
     	
     	viewFactory.closeStageFromNode(makeModeratorButton);
     }

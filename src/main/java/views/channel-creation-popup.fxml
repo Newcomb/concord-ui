@@ -37,8 +37,8 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onCancelButtonClicked" text="Cancel" />
-            <Button fx:id="submitButton" mnemonicParsing="false" onAction="#onCreateButtonClicked" text="Submit" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onCancelButtonClicked" text="Cancel" />
+            <Button fx:id="submitChannelButton" mnemonicParsing="false" onAction="#onCreateButtonClicked" text="Submit" />
          </children>
       </HBox>
    </children>
