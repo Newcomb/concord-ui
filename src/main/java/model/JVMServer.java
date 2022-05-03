@@ -199,6 +199,11 @@ public class JVMServer
 	@Override
 	public Boolean createDirectMessage(int otherID, int userID) throws RemoteException
 	{
+		for (Integer roomID : rl.getRooms().keySet()) {
+			if (rl.getRoom(roomID).toString().equals(ul.getUser(userID).getUsername() + " + " + ul.getUser(otherID).getUsername()) || rl.getRoom(roomID).toString().equals(ul.getUser(otherID).getUsername() + " + " + ul.getUser(userID).getUsername())){
+				return false;
+			}
+		}
 		Room dm = ul.getUser(userID).createDirectMessage(otherID, rl, ul);
 		if (dm != null) {
 			ul.getUser(otherID).addDirectMessage(dm.getRoomID());
@@ -544,8 +549,11 @@ public class JVMServer
 	@Override
 	public void setChatLogName(User u, int chatLogID, int roomID, String text) throws RemoteException
 	{
+		String role = rl.getRoom(roomID).getUserTable().get(u.getUserID()).getRoleName();
+		if (role.equals("Admin") || role.equals("Moderator")) {
 		rl.getRoom(roomID).getChatLog(chatLogID).setChatLogName(text);
 		notifyClient(roomID);
+		}
 	}
 
 

@@ -96,7 +96,13 @@ public class ProfilePopupController extends BaseController implements Initializa
 		}
         try
 		{
-			profile.setText(client.getUserList().getUser(userName.getUserID()).getProfileData());
+        	String status;
+        	if (client.getUserList().getUser(userName.getUserID()).getStatus()) {
+        		status = "Online";
+        	} else {
+        		status = "Offline";
+        	}
+			profile.setText(status + "\n" + client.getUserList().getUser(userName.getUserID()).getProfileData());
 		} catch (RemoteException e)
 		{
 			// TODO Auto-generated catch block

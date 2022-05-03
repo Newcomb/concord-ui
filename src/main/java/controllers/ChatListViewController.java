@@ -17,6 +17,7 @@ public class ChatListViewController extends BaseController implements Initializa
 
     @FXML
     private TextField dmMessageField;
+    
 
     @FXML
     private ListView<Chat> dmMessages;

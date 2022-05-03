@@ -174,9 +174,10 @@ class secondViewTest
 	        
 	    	robot.clickOn("#exploreButton");
 			
+	    	// Check that the size of the exploreLIst has gone down one since the room was added
 			Platform.runLater(() -> {
 				ListView exploreList = (ListView) robot.lookup("#exploreList").query();
-				assertEquals(exploreList.getItems().size(), 1);
+				assertEquals(exploreList.getItems().size(), 2);
 				semaphore.release();
 			});
 			
