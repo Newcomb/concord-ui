@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import model.Chat;
@@ -18,6 +19,8 @@ public class ChatListViewController extends BaseController implements Initializa
     @FXML
     private TextField dmMessageField;
     
+    @FXML
+    private Button sendDMButton;
 
     @FXML
     private ListView<Chat> dmMessages;

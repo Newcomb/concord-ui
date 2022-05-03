@@ -12,8 +12,8 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select DM" />
             <ListView fx:id="dmLists" prefHeight="376.0" prefWidth="100.0" />
-            <Button id="usersButton" mnemonicParsing="false" onAction="#OnCreateDMButtonClicked" prefHeight="26.0" prefWidth="102.0" text="Create DM" />
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnBlockUserButtonClicked" text="Block User" />
+            <Button id="usersButton" fx:id="createDMButton" mnemonicParsing="false" onAction="#OnCreateDMButtonClicked" prefHeight="26.0" prefWidth="102.0" text="Create DM" />
+            <Button fx:id="blockUserButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnBlockUserButtonClicked" text="Block User" />
          </children>
       </VBox>
    </left>

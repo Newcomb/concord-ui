@@ -3,6 +3,7 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import model.JVMClient;
 import model.Room;
@@ -14,6 +15,12 @@ public class DmViewController extends BaseController implements Initializable {
 
     @FXML
     private ListView<Room> dmLists;
+    
+    @FXML
+    private Button blockUserButton;
+
+    @FXML
+    private Button createDMButton;
 
     @FXML
     void OnCreateDMButtonClicked(ActionEvent event) {

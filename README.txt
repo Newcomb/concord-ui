@@ -7,4 +7,5 @@ For Sprint 1, there was one feature that I did not find necessary to implement a
 For Sprint 2, I believe I have implemented all necessary features based on the google document provided on Moodle.
 
 For Sprint 4B, first run the JVMServerTest.java in src/main/test, then run viewTests.java, secondViewTest.java, thirdViewTest.java, and fourthViewTest.java respectively from src/test/java. I sadly was not able to implement everything as of now, for some reason trying to test certain buttons and list views was not possible.
-I was unable to implement testing for inviting users to rooms, and setting up DMs.
+I was unable to implement testing for inviting users to rooms, and profile pictures being loaded in, as well as some functionality of DMs although I am not
+sure if I would want to be able to delete messages in DMs or reply to them because it seems irrelevant. I also believe blocking and unblocking works, as well as creating new dms but I did not get to that yet either.
