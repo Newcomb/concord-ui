@@ -152,7 +152,16 @@ public class Chat implements Serializable
 	 */
 	public void setPinned(Boolean pinned)
 	{
+		if (this.pinned == null) {
 		this.pinned = pinned;
+		}
+		else {
+			if (this.pinned == true) {
+				this.pinned = false;
+			} else {
+				this.pinned = true;
+			}
+		}
 	}
 	
 	public void setDeleted(Boolean flag)
@@ -166,7 +175,7 @@ public class Chat implements Serializable
 	}
 	
 	public String toString() {
-		return message;
+		return chatID + " : " + message;
 	}
 
 	@Override

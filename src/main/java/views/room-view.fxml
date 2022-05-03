@@ -19,6 +19,7 @@
             <Button fx:id="newChannelButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnCreateChannelButtonClicked" text="New Channel" />
             <Button fx:id="intviteUserButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Invite User" />
             <Button fx:id="editChannelButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnEditChannelButtonClicked" text="Edit Channel" />
+            <Button fx:id="getPinnedButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnClickGetPinnedButton" text="Get Pinned" />
          </children>
       </VBox>
    </left>

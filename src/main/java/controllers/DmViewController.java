@@ -34,9 +34,12 @@ public class DmViewController extends BaseController implements Initializable {
         dmLists.setItems(client.dms);
 
         dmLists.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+        	if (newValue != null) {
         	client.selectedRoomObject = newValue;
+        	
         	if (client.selectedRoomObject != null) {
         		client.selectedChatLogObject = client.selectedRoomObject.getChatLog(0);
+        	}
         	}
             viewFactory.showChatListView("dm");
         });

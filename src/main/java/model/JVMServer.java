@@ -378,10 +378,12 @@ public class JVMServer
 	@Override
 	public Boolean pinMessage(int chatID, int roomID, int chatLogID, int userID) throws RemoteException
 	{
+		if (rl.getRoom(roomID).getUserTable().get(userID).getDeleteChatPermission()) {
 		if (rl.getRoom(roomID).getChatLog(chatLogID).pinMessage(chatID)) {
 			storeDataDisk();
 			notifyClient(roomID);
 			return true;
+		}
 		}
 		return false;
 	}

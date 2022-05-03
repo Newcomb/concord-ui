@@ -6,7 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Chat;
+import model.ChatLog;
 import model.JVMClient;
+import model.Room;
 import model.User;
 
 import java.io.IOException;
@@ -129,15 +132,13 @@ public class ViewFactory {
 		
 	}
 
-	public void showChatPopup()
+	public void showChatPopup(Chat c, Room r, ChatLog cl)
 	{
-//		public void showCreateUserView()
-//		{
-//			 BaseController chatEditController =
-//		                new ChatEditController(client, this, "/views/chat-edit.fxml");
-//		        showStage(chatEditController);
-//			
-//		}
+
+		 BaseController chatPopup =
+	     new ChatPopup(client, this, "/views/chat-popup.fxml", c, r, cl);
+	     showStage(chatPopup);
+			
 		
 	}
 

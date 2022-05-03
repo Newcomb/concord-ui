@@ -161,6 +161,30 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 		this.chats.setAll(chatData);
 	}
 	
+	public void initializePinnedChatData() throws RemoteException
+	{
+		List<Chat> chatData = new ArrayList<>() {{
+		if (selectedRoomObject != null) {
+
+			    	Set<Integer> chatSet = serv.getRl().getRoom(selectedRoomObject.getRoomID()).getChatLog(selectedChatLogObject.getChatLogID()).getChat().keySet();
+			    	List<Integer> arr = new ArrayList<>(chatSet);
+			    	Collections.sort(arr);
+					for (Integer chatID : arr) {
+						if (!serv.getRl().getRoom(selectedRoomObject.getRoomID()).getChatLog(selectedChatLogObject.getChatLogID()).getChat(chatID).deleted && serv.getRl().getRoom(selectedRoomObject.getRoomID()).getChatLog(selectedChatLogObject.getChatLogID()).getChat(chatID).getPinned()) {
+							add(serv.getRl().getRoom(selectedRoomObject.getRoomID()).getChatLog(selectedChatLogObject.getChatLogID()).getChat(chatID));
+						}
+					
+				
+			}
+		}
+    	// }
+    	
+		}};
+		this.chats.clear();
+		this.chats.setAll(chatData);
+		
+	}
+	
     public void initializeRoomData() throws RemoteException {
     	System.out.println(u.getRooms());
         List<Room> roomNames = new ArrayList<>() {{
@@ -681,6 +705,8 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 	{
 		this.rl = rl;
 	}
+
+
 
 
 	

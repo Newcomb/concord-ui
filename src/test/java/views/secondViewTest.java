@@ -163,8 +163,12 @@ class secondViewTest
 				users.getSelectionModel().select(1);
 				semaphore.release();
 			});
+
 			semaphore.acquire();
 			
+			
+			 t = robot.lookup("#profile").query();
+			 assertEquals(t.getText().equals("Online\nI am a freelance decoder!"), true);
 			
 			// CHekc when added to room you are noob
 			t = (Label) robot.lookup("#name").query();

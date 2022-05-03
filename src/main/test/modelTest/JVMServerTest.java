@@ -240,6 +240,8 @@ class JVMServerTest
 		
 		// Test that you can add chat
 		assertEquals(c.addChat(0, 0, "New Chat"), true);
+		
+		assertEquals(c.pinMessage(1, 0, 0), true);
 
 		// Test that chat was created
 		assertEquals(c.getChatLog(0, 0).getChat(1).getMessage(),"New Chat");
@@ -273,7 +275,7 @@ class JVMServerTest
 		assertEquals(c.setChatLogLocked(0, 0, true), true);
 		
 		// check that a message can be pinned
-		assertEquals(c2.pinMessage(1, 0, 0), true);
+		assertEquals(c2.pinMessage(1, 0, 0), false);
 		
 		// show that message was pinned
 		assertEquals(c2.getPinnedMessages(0, 0).size(), 1);
@@ -345,6 +347,12 @@ class JVMServerTest
 		
 		// Show that you can repy to a chat
 		assertEquals(c2.chatLogReply("I love it!", 0, 0, 1), true);
+
+		
+		// check that a message can be pinned
+		assertEquals(c.pinMessage(2, 0, 0), true);
+		
+		
 		
 		// Show that it created the reply
 		assertEquals(c2.getChatLog(0, 0).getChat(2).getReplyToID(), 1);
@@ -427,7 +435,7 @@ class JVMServerTest
 		
 		// These below were done previously
 		
-		assertEquals(c.getRl().getRoom(0).getChatLog(0).getPinned().size(), 1);
+		assertEquals(c.getRl().getRoom(0).getChatLog(0).getPinned().size(), 2);
 		
 		assertEquals(c.getRl().getRoom(0).getChatLog(0).getLocked(), true);
 		

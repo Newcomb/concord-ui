@@ -50,6 +50,8 @@ public class RoomViewController extends BaseController implements Initializable 
     @FXML
     private Button newChannelButton;
     
+    @FXML
+    private Button getPinnedButton;
     
 
     public RoomViewController(JVMClient client, ViewFactory viewFactory, String fxmlName) {
@@ -63,6 +65,12 @@ public class RoomViewController extends BaseController implements Initializable 
     	} 
     }
     
+    @FXML
+    void OnClickGetPinnedButton(ActionEvent event) throws RemoteException {
+    	if (client.selectedChatLogObject != null) {
+    		client.initializePinnedChatData();
+    	}
+    }
 
     @FXML
     void OnEditChannelButtonClicked(ActionEvent event) {
@@ -134,7 +142,7 @@ public class RoomViewController extends BaseController implements Initializable 
         	if (newValue != null) {
         		client.selectedChatObject = newValue;
             // not working at the moment
-        		// viewFactory.showChatPopup();
+        		viewFactory.showChatPopup(newValue, client.selectedRoomObject, client.selectedChatLogObject);
         	}
         });
         
