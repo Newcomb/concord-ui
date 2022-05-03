@@ -68,12 +68,166 @@ class fifthViewTest
 			Platform.runLater(() -> {
 	    	    ListView chats = (ListView) robot.lookup("#dmMessages").query();
 	    	    assertEquals(chats.getItems().size(), 1);
-	    	    chats.getSelectionModel().select(0);
 	    		semaphore.release();
 				
 			});
 				
 			semaphore.acquire();
+			
+			robot.clickOn("#blockUserButton");
+			
+			Platform.runLater(() -> {
+	    	    ListView users = (ListView) robot.lookup("#usersList").query();
+	    	    users.getSelectionModel().select(1);
+	    		semaphore.release();
+				
+			});
+			semaphore.acquire();
+			
+			robot.clickOn("#actionButtonTwo");
+
+			
+			robot.clickOn("#createDMButton");
+			
+			
+			// Select a user 
+			Platform.runLater(() -> {
+	    	    ListView users = (ListView) robot.lookup("#usersList").query();
+	    	    users.getSelectionModel().select(1);
+	    		semaphore.release();
+				
+			});
+			semaphore.acquire();
+			
+			// Try to add user to dm
+			robot.clickOn("#actionButtonTwo");
+			
+			// check that the dm was not added
+			Platform.runLater(() -> {
+	    	    ListView dms = (ListView) robot.lookup("#dmLists").query();
+	    	    assertEquals(dms.getItems().size(), 1);
+	    		semaphore.release();
+				
+			});
+			
+			semaphore.acquire();
+			
+			// Switch user to see that they cant add dm either
+			
+			robot.clickOn("#logOutButton");
+			robot.clickOn("#userNameField");
+			robot.write("denise");
+			robot.clickOn("#passwordField");
+			robot.write("DeniseRocks");
+			robot.clickOn("#loginButton");
+			
+			robot.clickOn("#dmButton");
+			
+
+			robot.clickOn("#createDMButton");
+			
+			Platform.runLater(() -> {
+	    	    ListView users = (ListView) robot.lookup("#usersList").query();
+	    	    users.getSelectionModel().select(0);
+	    		semaphore.release();
+				
+			});
+			semaphore.acquire();
+			
+			robot.clickOn("#actionButtonTwo");
+			
+			
+			// check that the dm was not added
+			Platform.runLater(() -> {
+	    	    ListView dms = (ListView) robot.lookup("#dmLists").query();
+	    	    assertEquals(dms.getItems().size(), 0);
+	    		semaphore.release();
+				
+			});
+			
+			semaphore.acquire();
+			
+			robot.clickOn("#logOutButton");
+			
+			robot.clickOn("#userNameField");
+			robot.write("bob");
+			robot.clickOn("#passwordField");
+			robot.write("ILoveDogs");
+			robot.clickOn("#loginButton");
+
+			robot.clickOn("#dmButton");
+			
+			// Unblock user and try to add 
+			robot.clickOn("#blockUserButton");
+			
+			Platform.runLater(() -> {
+	    	    ListView users = (ListView) robot.lookup("#usersList").query();
+	    	    users.getSelectionModel().select(1);
+	    		semaphore.release();
+				
+			});
+			semaphore.acquire();
+			
+			robot.clickOn("#actionButton");
+			
+			robot.clickOn("#createDMButton");
+			
+			Platform.runLater(() -> {
+	    	    ListView users = (ListView) robot.lookup("#usersList").query();
+	    	    users.getSelectionModel().select(1);
+	    		semaphore.release();
+				
+			});
+			semaphore.acquire();
+			
+			robot.clickOn("#actionButtonTwo");
+			
+			
+			// check that the dm was added
+			Platform.runLater(() -> {
+	    	    ListView dms = (ListView) robot.lookup("#dmLists").query();
+	    	    assertEquals(dms.getItems().size(), 2);
+	    		semaphore.release();
+				
+			});
+			
+			semaphore.acquire();
+			
+			
+			
+			robot.clickOn("#logOutButton");
+			robot.clickOn("#userNameField");
+			robot.write("denise");
+			robot.clickOn("#passwordField");
+			robot.write("DeniseRocks");
+			robot.clickOn("#loginButton");
+			
+			robot.clickOn("#dmButton");
+			
+			// check that the dm was added
+			Platform.runLater(() -> {
+	    	    ListView dms = (ListView) robot.lookup("#dmLists").query();
+	    	    assertEquals(dms.getItems().size(), 1);
+	    		semaphore.release();
+				
+			});
+			
+			semaphore.acquire();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 
