@@ -42,7 +42,7 @@ public class RoomViewController extends BaseController implements Initializable 
     private Button editChannelButton;
 
     @FXML
-    private Button intviteUserButton;
+    private Button inviteUserButton;
     
     @FXML
     private Button sendButton;
@@ -63,6 +63,14 @@ public class RoomViewController extends BaseController implements Initializable 
     	if (client.selectedRoomObject != null) {
     	viewFactory.showChannelCreationPopup("Create");
     	} 
+    }
+    
+
+    @FXML
+    void OnInviteUserButtonClicked(ActionEvent event) {
+    	if (client.selectedRoomObject != null ) {
+    		viewFactory.showUsersList("Invite");
+    	}
     }
     
     @FXML

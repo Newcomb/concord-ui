@@ -14,7 +14,7 @@ public class Noob extends Role
 	public final Boolean invitePermission = true;
 	public final Boolean modifyRoomPermission = false;
 	
-
+	
 	public Noob()
 	{
 		// TODO Auto-generated constructor stub

@@ -139,6 +139,23 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 		
 	}
 	
+	public void initialInviteUsersData() throws RemoteException
+	{
+        List<User> userNames = new ArrayList<>() {{
+
+			for (Integer userID : serv.getUl().getUsers().keySet()) {
+				if (userID != u.getUserID() && !serv.getRl().getRoom(selectedRoomObject.getRoomID()).userTable.containsKey(userID)) {
+					add(serv.getUl().getUser(userID));
+				}
+			}
+        	
+        	
+        }};
+        this.userNames.clear();
+        this.userNames.addAll(userNames);
+		
+	}
+	
 	public void initializeChatData() {
 		List<Chat> chatData = new ArrayList<>() {{
 		if (selectedRoomObject != null) {
@@ -705,6 +722,8 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 	{
 		this.rl = rl;
 	}
+
+
 
 
 

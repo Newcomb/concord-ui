@@ -52,8 +52,12 @@ public class ViewFactory {
     public void showUsersList(String type) {
         BaseController usersListViewController =
                 new UsersListViewController(client, this, "/views/users-list-view.fxml", type);
+        if (!type.equals("Invite")) {
         Parent usersListView = getView(usersListViewController);
         dmView.setCenter(usersListView);
+        } else {
+        	showStage(usersListViewController);
+        }
     }
 
     public void showChatListView(String view) {

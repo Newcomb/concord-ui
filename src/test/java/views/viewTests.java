@@ -141,7 +141,7 @@ class viewTests
 		
 		
 	// I do no understand why this doesnt work
-		Semaphore semaphore = new Semaphore(0);
+	Semaphore semaphore = new Semaphore(0);
 	Platform.runLater(() -> {
 		ListView listView = (ListView) robot.lookup("#roomList").query();
     	listView.getSelectionModel().select(0);
@@ -151,6 +151,7 @@ class viewTests
 	
 	
 	semaphore.acquire();
+	
 	robot.clickOn("#newChannelButton");
 
 	robot.clickOn("#channelNameField");
