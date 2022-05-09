@@ -9,8 +9,7 @@ moderator is, so I left it to the administrator to specify any role assignments.
 For Sprint 2, I believe I have implemented all necessary features based on the google document provided on Moodle.
 
 For Sprint 4B I made a collection of functional tests that are run individually but focus on a specific part of the implementation. First run the 
-JVMServerTest.java in src/main/test file, then run viewTests.java, secondViewTest.java, thirdViewTest.java, fourthViewTest.java, 
-fifthViewTest.java, and then sixthViewTest.java respectively from src/test/java file. I sadly was not able to implement everything as of now, for some reason trying to
+JVMServerTest.java in src/main/test file, then run TestJUnit1.java respectively from src/test/java file. I sadly was not able to implement everything as of now, for some reason trying to
  test certain buttons and list views was not possible.
 I was unable to implement testing for inviting users to rooms, and profile pictures being loaded in, as well as some functionality of
  DMs although I am not
