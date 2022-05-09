@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Label id="errorMsg" fx:id="errorMsg" textFill="RED">
                <font>
@@ -20,18 +20,24 @@
             </Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text=" User name" />
+                  <Label text=" Username" textFill="#84dcc6">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></Label>
                   <TextField id="userNameField" fx:id="userNameField" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Password" />
+                  <Label text="Password" textFill="#84dcc6">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></Label>
                   <TextField id="passwordField" fx:id="passwordField" />
                </children>
             </HBox>
-            <Button id="loginButton" fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginButtonClicked" text="Login" />
-            <Button fx:id="newAccountButton" alignment="CENTER" mnemonicParsing="false" onAction="#onCreateNewClicked" text="Create New Account">
+            <Button id="loginButton" fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginButtonClicked" style="-fx-background-color: #4B4E6D;" text="Login" textFill="#f9ada0" />
+            <Button fx:id="newAccountButton" alignment="CENTER" mnemonicParsing="false" onAction="#onCreateNewClicked" style="-fx-background-color: #4B4E6D;" text="Create New Account" textFill="#f9ada0">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>

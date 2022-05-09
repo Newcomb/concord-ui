@@ -12,34 +12,34 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="409.0" prefWidth="100.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER">
          <children>
-            <Text fx:id="roomName" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Room" />
-            <ListView fx:id="channelList" prefHeight="200.0" prefWidth="200.0" />
-            <Button fx:id="newChannelButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnCreateChannelButtonClicked" text="New Channel" />
-            <Button fx:id="inviteUserButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnInviteUserButtonClicked" text="Invite User" />
-            <Button fx:id="editChannelButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnEditChannelButtonClicked" text="Edit Channel" />
-            <Button fx:id="getPinnedButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnClickGetPinnedButton" text="Get Pinned" />
+            <Text fx:id="roomName" fill="#f9ada0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Room" />
+            <ListView fx:id="channelList" prefHeight="301.0" prefWidth="100.0" />
+            <Button fx:id="newChannelButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnCreateChannelButtonClicked" style="-fx-background-color: #F9ADA0; -fx-border-color: #95A3B3;" text="New Channel" />
+            <Button fx:id="inviteUserButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnInviteUserButtonClicked" style="-fx-background-color: #F9ADA0#F9ADA0; -fx-border-color: #95A3B3#95A3B3;" text="Invite User" />
+            <Button fx:id="editChannelButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnEditChannelButtonClicked" style="-fx-background-color: #F9ADA0#F9ADA0; -fx-border-color: #95A3B3#95A3B3;" text="Edit Channel" />
+            <Button fx:id="getPinnedButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnClickGetPinnedButton" style="-fx-background-color: #F9ADA0#F9ADA0; -fx-border-color: #95A3B3#95A3B3;" text="Get Pinned" />
          </children>
       </VBox>
    </left>
    <right>
-      <ListView fx:id="userList" prefHeight="400.0" prefWidth="117.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="userList" prefHeight="400.0" prefWidth="113.0" BorderPane.alignment="CENTER" />
    </right>
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
-            <ScrollPane prefHeight="348.0" prefWidth="383.0" BorderPane.alignment="CENTER">
+            <ScrollPane prefHeight="374.0" prefWidth="388.0" BorderPane.alignment="CENTER">
                <content>
                   <ListView fx:id="roomChatList" prefHeight="348.0" prefWidth="385.0" />
                </content>
             </ScrollPane>
          </center>
          <bottom>
-            <HBox prefHeight="50.0" prefWidth="383.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="26.0" prefWidth="400.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="messageField" />
-                  <Button fx:id="sendButton" mnemonicParsing="false" onAction="#OnSendButtonClicked" text="Send" />
+                  <TextField fx:id="messageField" prefHeight="26.0" prefWidth="320.0" />
+                  <Button fx:id="sendButton" mnemonicParsing="false" onAction="#OnSendButtonClicked" prefHeight="26.0" prefWidth="54.0" text="Send" />
                   <Text fx:id="textWarning" fill="#dd3434" strokeType="OUTSIDE" strokeWidth="0.0">
                      <HBox.margin>
                         <Insets left="10.0" top="5.0" />

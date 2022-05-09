@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="mainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane id="mainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="849.0" style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <VBox prefHeight="400.0" prefWidth="130.0" BorderPane.alignment="CENTER">
          <children>
-            <Button id="dmButton" fx:id="dmButton" mnemonicParsing="false" onAction="#onDMButtonClicked" prefHeight="26.0" prefWidth="130.0" text="DM" />
-            <ListView id="roomList" fx:id="roomList" prefHeight="322.0" prefWidth="130.0" />
-            <Button fx:id="createRButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnCreateRoomButtonClicked" text="Create Room" />
-            <Button id="exploreButton" fx:id="exploreButton" mnemonicParsing="false" onAction="#onExploreButtonClicked" prefHeight="26.0" prefWidth="130.0" text="Explore" />
-            <Button fx:id="editProfileButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnEditProfileClickedButton" text="Edit Profile" />
-            <Button fx:id="logOutButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnLogOutButtonClicked" text="Log Out" />
+            <Button id="dmButton" fx:id="dmButton" mnemonicParsing="false" onAction="#onDMButtonClicked" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #4B4E6D;" text="DM" textFill="#84dcc6" />
+            <ListView id="roomList" fx:id="roomList" prefHeight="322.0" prefWidth="130.0" style="-fx-background-color: gray;" />
+            <Button fx:id="createRButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnCreateRoomButtonClicked" style="-fx-background-color: #84DCC6; -fx-border-color: #4B4E6D;" text="Create Room" textFill="#4b4e6d" />
+            <Button id="exploreButton" fx:id="exploreButton" mnemonicParsing="false" onAction="#onExploreButtonClicked" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #84DCC6; -fx-border-color: #4B4E6D#4B4E6D;" text="Explore" textFill="#4b4e6d" />
+            <Button fx:id="editProfileButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnEditProfileClickedButton" style="-fx-background-color: #84DCC6#84DCC6; -fx-border-color: #4B4E6D#4B4E6D;" text="Edit Profile" textFill="#4b4e6d" />
+            <Button fx:id="logOutButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnLogOutButtonClicked" style="-fx-background-color: #84DCC6#84DCC6; -fx-border-color: #4B4E6D#4B4E6D;" text="Log Out" textFill="#4b4e6d" />
          </children>
       </VBox>
    </left>
