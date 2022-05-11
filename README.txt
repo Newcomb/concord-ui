@@ -11,6 +11,3 @@ For Sprint 2, I believe I have implemented all necessary features based on the g
 For Sprint 4B I made a collection of functional tests that are run individually but focus on a specific part of the implementation. First run the 
 JVMServerTest.java in src/main/test file, then run TestJUnit1.java respectively from src/test/java file. I sadly was not able to implement everything as of now, for some reason trying to
  test certain buttons and list views was not possible.
-I was unable to implement testing for inviting users to rooms, and profile pictures being loaded in, as well as some functionality of
- DMs although I am not
-sure if I would want to be able to delete messages in DMs or reply to them because it seems irrelevant.
