@@ -146,4 +146,12 @@ public class ViewFactory {
 		
 	}
 
+	public void showGamePopup()
+	{
+		BaseController gameChatPopup = 
+				new GamePopupController(client, this, "/views/game-popup.fxml");
+		showStage(gameChatPopup);
+		
+	}
+
 }

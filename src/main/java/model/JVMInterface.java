@@ -65,7 +65,7 @@ public interface JVMInterface extends Remote
 
 	public RoomList getRl() throws RemoteException;
 
-	public Boolean createRoom(String des, String logo, Boolean type, User u) throws RemoteException;
+	public Room createRoom(String des, String logo, Boolean type, User u) throws RemoteException;
 	
 	
 	public Boolean updateUser(User u) throws RemoteException;
@@ -97,5 +97,8 @@ public interface JVMInterface extends Remote
 	Boolean addChatLog(String name, int roomID, int userID, Boolean locked) throws RemoteException;
 
 	public void setChatLogName(User u, int chatLogID, int roomID, String text) throws RemoteException;
+
+
+	public Boolean addGameChatLog(String type, int roomID, int userID, List<Integer> users) throws RemoteException;
 	
 }

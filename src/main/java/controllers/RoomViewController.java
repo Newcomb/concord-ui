@@ -40,6 +40,9 @@ public class RoomViewController extends BaseController implements Initializable 
     
     @FXML
     private Button editChannelButton;
+    
+    @FXML
+    private Button newGameButton;
 
     @FXML
     private Button inviteUserButton;
@@ -63,6 +66,13 @@ public class RoomViewController extends BaseController implements Initializable 
     	if (client.selectedRoomObject != null) {
     	viewFactory.showChannelCreationPopup("Create");
     	} 
+    }
+    
+    @FXML
+    void OnNewGameButtonClicked(ActionEvent event) {
+    	if (client.selectedRoomObject != null) {
+    		viewFactory.showGamePopup();
+    	}
     }
     
 

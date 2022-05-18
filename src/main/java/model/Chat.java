@@ -17,6 +17,9 @@ public class Chat implements Serializable
 	public Boolean deleted;
 	public int replyToID;
 	
+	// Meant to provide a way for chats to be seen or ignored in a game
+	int visibleFor;
+	
 	public Chat() {
 		super();
 	}
@@ -37,6 +40,7 @@ public class Chat implements Serializable
 		this.timeStamp = timeStamp;
 		this.pinned = pinned;
 		this.deleted = false;
+		this.visibleFor = -1;
 		this.replyToID = -1;
 	}
 	
@@ -57,8 +61,22 @@ public class Chat implements Serializable
 		this.pinned = pinned;
 		this.deleted = false;
 		this.replyToID = replyTo;
+		this.visibleFor = -1;
 	}
 
+	public Chat(int chatID, int senderID, String message, Date timeStamp, Boolean pinned, int replyTo, int visibleFor)
+	{
+		super();
+		this.chatID = chatID;
+		this.senderID = senderID;
+		this.message = message;
+		this.timeStamp = timeStamp;
+		this.pinned = pinned;
+		this.deleted = false;
+		this.visibleFor = visibleFor;
+		this.replyToID = -1;
+	}	
+	
 	/**
 	 * @return the chatID
 	 */
@@ -190,6 +208,7 @@ public class Chat implements Serializable
 		result = prime * result + replyToID;
 		result = prime * result + senderID;
 		result = prime * result + ((timeStamp == null) ? 0 : timeStamp.hashCode());
+		result = prime * result + visibleFor;
 		return result;
 	}
 
@@ -199,51 +218,30 @@ public class Chat implements Serializable
 		if (this == obj)
 			return true;
 		if (obj == null)
-		{
 			return false;
-		}
 		if (getClass() != obj.getClass())
-		{
 			return false;
-		}
 		Chat other = (Chat) obj;
 		if (chatID != other.chatID)
-		{
 			return false;
-		}
 		if (deleted == null)
 		{
 			if (other.deleted != null)
 				return false;
 		} else if (!deleted.equals(other.deleted))
-		{
-			System.out.println("deleted");
 			return false;
-		}
 		if (message == null)
 		{
 			if (other.message != null)
-			{
-				System.out.println("deleted");
 				return false;
-			}
 		} else if (!message.equals(other.message))
-		{
-			System.out.println("deleted");
 			return false;
-		}
 		if (pinned == null)
 		{
 			if (other.pinned != null)
-			{
-				System.out.println("deleted");
 				return false;
-			}
 		} else if (!pinned.equals(other.pinned))
-		{
-			System.out.println("deleted");
 			return false;
-		}
 		if (replyToID != other.replyToID)
 			return false;
 		if (senderID != other.senderID)
@@ -253,11 +251,26 @@ public class Chat implements Serializable
 			if (other.timeStamp != null)
 				return false;
 		} else if (!timeStamp.equals(other.timeStamp))
-		{
-			System.out.println("deleted");
 			return false;
-		}
+		if (visibleFor != other.visibleFor)
+			return false;
 		return true;
+	}
+
+	/**
+	 * @return the visibleFor
+	 */
+	public int getVisibleFor()
+	{
+		return visibleFor;
+	}
+
+	/**
+	 * @param visibleFor the visibleFor to set
+	 */
+	public void setVisibleFor(int visibleFor)
+	{
+		this.visibleFor = visibleFor;
 	}
 	
 }

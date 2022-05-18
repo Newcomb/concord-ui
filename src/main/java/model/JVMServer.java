@@ -233,6 +233,22 @@ public class JVMServer
 		return false;
 	}
 	
+	
+	@Override
+	public Boolean addGameChatLog(String type, int roomID, int userID, List<Integer> users) throws RemoteException
+	{
+		Room r = rl.getRoom(roomID).addGameChatLog(type, users);
+		if (r != null) {
+			System.out.println("Here True");
+			rl.getRooms().put(r.getRoomID(), r);
+			storeDataDisk();
+			notifyClient(roomID);
+			return true;
+		}
+		return null;
+	}
+	
+	
 	@Override
 	// Will need to use notify function
 	public Boolean removeChatLog(int roomID, int chatLogID, int userID) throws RemoteException
@@ -329,6 +345,7 @@ public class JVMServer
 		}
 		return false;
 	}
+	
 	
 	
 	@Override 
@@ -432,7 +449,7 @@ public class JVMServer
 	
 	
 	@Override
-	public Boolean createRoom(String des, String logo, Boolean type, User u) throws RemoteException
+	public Room createRoom(String des, String logo, Boolean type, User u) throws RemoteException
 	{
 		rl.addRoom(u.createRoom(des, logo, type), u);
 		System.out.println(u.getRooms());
@@ -442,7 +459,7 @@ public class JVMServer
 		storeDataDisk();
 		System.out.println(rl.getRoom(rl.getRoomTracker()-1).getLogo());
 		notifyClient(rl.getRoomTracker() - 1);
-		return true;
+		return rl.getRoom(rl.getRoomTracker()-1);
 	}
 
 	/**
@@ -557,6 +574,7 @@ public class JVMServer
 		notifyClient(roomID);
 		}
 	}
+
 
 
 }

@@ -5,23 +5,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="196.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #222222 #222222;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="name" alignment="CENTER" prefHeight="82.0" prefWidth="196.0">
+      <Label fx:id="name" alignment="CENTER" prefHeight="73.0" prefWidth="293.0" textFill="#f9ada0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label text="ABOUT ME">
+      <Label text="ABOUT ME" textFill="#f9ada0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="profile" prefHeight="194.0" prefWidth="196.0" wrapText="true" />
-      <Button fx:id="makeAdminButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnMakeAdminButtonClicked" text="Make Admin" />
-      <Button fx:id="makeModeratorButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnMakeModeratorButtonClicked" text="Make Moderator" />
-      <Button fx:id="makeNoobButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnClickMakeNoobButton" text="Make Noob" />
-      <Button fx:id="kickButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnKickButtonClicked" text="Kick" />
-      <Button fx:id="cancelButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnCloseButtonClicked" text="Close" />
+      <Label fx:id="profile" prefHeight="182.0" prefWidth="298.0" textFill="#f9ada0" wrapText="true" />
+      <Button fx:id="changeGameStatusButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnChangeGameStatusButtonClicked" style="-fx-background-color: gray; -fx-border-color: #222222;" text="Change Game Status" textFill="#f9ada0" />
+      <Button fx:id="makeAdminButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnMakeAdminButtonClicked" style="-fx-background-color: gray; -fx-border-color: #222222;" text="Make Admin" textFill="#f9ada0" />
+      <Button fx:id="makeModeratorButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnMakeModeratorButtonClicked" style="-fx-background-color: gray; -fx-border-color: #222222;" text="Make Moderator" textFill="#f9ada0" />
+      <Button fx:id="makeNoobButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnClickMakeNoobButton" style="-fx-background-color: gray; -fx-border-color: #222222;" text="Make Noob" textFill="#f9ada0" />
+      <Button fx:id="kickButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnKickButtonClicked" style="-fx-background-color: gray; -fx-border-color: #222222;" text="Kick" textFill="#f9ada0" />
+      <Button fx:id="cancelButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnCloseButtonClicked" style="-fx-background-color: gray; -fx-border-color: #222222;" text="Close" textFill="#f9ada0" />
    </children>
 </VBox>

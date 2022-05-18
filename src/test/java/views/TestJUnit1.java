@@ -345,7 +345,7 @@ public class TestJUnit1
 		
 		
 		 Label tex = (Label) robot.lookup("#profile").query();
-		 assertEquals(tex.getText().equals("Online\nI am a freelance decoder!"), true);
+		 assertEquals(tex.getText(), "Status: Online\n\nI am a freelance decoder!\n\nGame Status: Does not want to game");
 		
 		// CHekc when added to room you are noob
 		t1 = (Label) robot.lookup("#name").query();
@@ -448,6 +448,8 @@ public class TestJUnit1
 		semaphore.acquire();
 		
 		// Checks that type cannot be changed by noob
+		
+		Thread.sleep(1500);
 		
 		robot.clickOn("#editChannelButton");
 		
@@ -935,11 +937,20 @@ public class TestJUnit1
 		
 		
 		// Check that the user cant join the room in the explore page
-		robot.clickOn("#exploreButton");
+		// robot.clickOn("#exploreButton");
 		
+//		Platform.runLater(() -> {
+//    	    ListView rooms = (ListView) robot.lookup("#exploreList").query();
+//    	    assertEquals(rooms.getItems().size(), 4);
+//    		semaphore.release();
+//			
+//		});
+//		semaphore.acquire();
+		
+		// Check that the room was added
 		Platform.runLater(() -> {
-    	    ListView rooms = (ListView) robot.lookup("#exploreList").query();
-    	    assertEquals(rooms.getItems().size(), 5);
+    	    ListView rooms = (ListView) robot.lookup("#roomList").query();
+    	   	rooms.getSelectionModel().select(0);
     		semaphore.release();
 			
 		});
@@ -948,9 +959,214 @@ public class TestJUnit1
 		
 		
 		
+		
+		robot.clickOn("#newGameButton");
+		
+		Platform.runLater(() -> {
+    	    ListView games = (ListView) robot.lookup("#gameListView").query();
+    	    games.getSelectionModel().select(0);
+    		semaphore.release();
+			
+		});
+		semaphore.acquire();
+		
+		robot.clickOn("#createGameButton");
+		
+		Platform.runLater(() -> {
+    	    ListView channels = (ListView) robot.lookup("#channelList").query();
+    	    channels.getSelectionModel().select(1);
+    		semaphore.release();
+			
+		});
+		semaphore.acquire();
+		
+		
+		Platform.runLater(() -> {
+    	    ListView chats = (ListView) robot.lookup("#roomChatList").query();
+    	    assertEquals(chats.getItems().get(0).toString(), "0 : Players: bob denise ");
+    	    assertEquals(chats.getItems().get(1).toString(), "1 : Type: \"Delete\" to end the game");
+    	    assertEquals(chats.getItems().get(2).toString(), "2 : Moves: \"Rock\" \"Spock\" \"Scissors\" \"Lizard\" \"Paper\" ");
+    		semaphore.release();
+			
+		});
+		
+		semaphore.acquire();
+		
+		robot.clickOn("#messageField");
+		
+		robot.write("Rock");
+		
+		robot.clickOn("#sendButton");
+		
+		robot.clickOn("#logOutButton");
+		
+		robot.clickOn("#userNameField");
+		robot.write("bob");
+		robot.clickOn("#passwordField");
+		robot.write("ILoveDogs");
+		robot.clickOn("#loginButton");
+		
+		Platform.runLater(() -> {
+    	    ListView rooms = (ListView) robot.lookup("#roomList").query();
+    	   	rooms.getSelectionModel().select(0);
+    		semaphore.release();
+			
+		});
+		semaphore.acquire();
+		
+		
+		Platform.runLater(() -> {
+    	    ListView channels = (ListView) robot.lookup("#channelList").query();
+    	    channels.getSelectionModel().select(1);
+    		semaphore.release();
+			
+		});
+		semaphore.acquire();
+		
+		Thread.sleep(1000);
+		
+		// Check that you cant see the message denise sent
+		Platform.runLater(() -> {
+    	    ListView chats = (ListView) robot.lookup("#roomChatList").query();
+    	    assertEquals(chats.getItems().size(), 3);
+    		semaphore.release();
+			
+		});
+		semaphore.acquire();
+		
+		robot.clickOn("#messageField");
+		
+		robot.write("Scissors");
+		
+		robot.clickOn("#sendButton");
+		
+		// CHeck that there is a winner displayed
+		Platform.runLater(() -> {
+    	    ListView chats = (ListView) robot.lookup("#roomChatList").query();
+    	    assertEquals(chats.getItems().get(4).toString(), "5 : Winner: denise ");
+    		semaphore.release();
+			
+		});
+		semaphore.acquire();
 
+		// Delete the gamelog
+		robot.clickOn("#messageField");
+		
+		robot.write("Delete");
+		
+		robot.clickOn("#sendButton");
+		
+		
+		
+		robot.clickOn("#logOutButton");
+		
+		robot.clickOn("#userNameField");
+		robot.write("janice");
+		robot.clickOn("#passwordField");
+		robot.write("CodingRocks");
+		robot.clickOn("#loginButton");
+		
+		// Check that you change the game status 
+		
+		Platform.runLater(() -> {
+    	    ListView rooms = (ListView) robot.lookup("#roomList").query();
+    	   	rooms.getSelectionModel().select(2);
+    		semaphore.release();
+			
+		});
+		semaphore.acquire();
+		
+		Platform.runLater(() -> {
+    	    ListView users = (ListView) robot.lookup("#userList").query();
+    	   	users.getSelectionModel().select(1);
+    		semaphore.release();
+			
+		});
+		semaphore.acquire();
+		
+		Thread.sleep(1000);
+		
+		robot.clickOn("#changeGameStatusButton");
+		
+		robot.clickOn("#newGameButton");
+		
+		Platform.runLater(() -> {
+    	    ListView games = (ListView) robot.lookup("#gameListView").query();
+    	    games.getSelectionModel().select(0);
+    		semaphore.release();
+			
+		});
+		semaphore.acquire();
+		
+		robot.clickOn("#createGameButton");
+		
+		Platform.runLater(() -> {
+    	    ListView channels = (ListView) robot.lookup("#channelList").query();
+    	    channels.getSelectionModel().select(1);
+    		semaphore.release();
+			
+		});
+		semaphore.acquire();
+		
+		// Test that new player is put in
+		Platform.runLater(() -> {
+    	    ListView chats = (ListView) robot.lookup("#roomChatList").query();
+    	    assertEquals(chats.getItems().get(0).toString(), "0 : Players: bob janice denise ");
+    	    assertEquals(chats.getItems().get(1).toString(), "1 : Type: \"Delete\" to end the game");
+    	    assertEquals(chats.getItems().get(2).toString(), "2 : Moves: \"Rock\" \"Spock\" \"Scissors\" \"Lizard\" \"Paper\" ");
+    		semaphore.release();
+			
+		});
+		
+		semaphore.acquire();
+		
+		
+		// Check that a message not specified can be seen by other people
+		
+		robot.clickOn("#messageField");
+		
+		robot.write("Hello!");
+		
+		robot.clickOn("#sendButton");
+		
+		robot.clickOn("#logOutButton");
+		
+		robot.clickOn("#userNameField");
+		robot.write("bob");
+		robot.clickOn("#passwordField");
+		robot.write("ILoveDogs");
+		robot.clickOn("#loginButton");
+		
+		Platform.runLater(() -> {
+    	    ListView rooms = (ListView) robot.lookup("#roomList").query();
+    	   	rooms.getSelectionModel().select(0);
+    		semaphore.release();
+			
+		});
+		semaphore.acquire();
+		
+		
+		Platform.runLater(() -> {
+    	    ListView channels = (ListView) robot.lookup("#channelList").query();
+    	    channels.getSelectionModel().select(1);
+    		semaphore.release();
+			
+		});
+		semaphore.acquire();
+		
+		Thread.sleep(1000);
+		
+		// Check that you cant see the message denise sent
+		Platform.runLater(() -> {
+    	    ListView chats = (ListView) robot.lookup("#roomChatList").query();
+    	    assertEquals(chats.getItems().size(), 4);
+    		semaphore.release();
+			
+		});
+		semaphore.acquire();
 		
 	}
+	
 	
 
 	

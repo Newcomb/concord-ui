@@ -17,8 +17,9 @@
             <Text fx:id="roomName" fill="#f9ada0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Room" />
             <ListView fx:id="channelList" prefHeight="301.0" prefWidth="100.0" />
             <Button fx:id="newChannelButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnCreateChannelButtonClicked" style="-fx-background-color: #F9ADA0; -fx-border-color: #95A3B3;" text="New Channel" />
-            <Button fx:id="inviteUserButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnInviteUserButtonClicked" style="-fx-background-color: #F9ADA0#F9ADA0; -fx-border-color: #95A3B3#95A3B3;" text="Invite User" />
             <Button fx:id="editChannelButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnEditChannelButtonClicked" style="-fx-background-color: #F9ADA0#F9ADA0; -fx-border-color: #95A3B3#95A3B3;" text="Edit Channel" />
+            <Button fx:id="inviteUserButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnInviteUserButtonClicked" style="-fx-background-color: #F9ADA0; -fx-border-color: #95A3B3;" text="Invite User" />
+            <Button fx:id="newGameButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnNewGameButtonClicked" style="-fx-background-color: #F9ADA0; -fx-border-color: #95A3B3;" text="New Game" />
             <Button fx:id="getPinnedButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnClickGetPinnedButton" style="-fx-background-color: #F9ADA0#F9ADA0; -fx-border-color: #95A3B3#95A3B3;" text="Get Pinned" />
          </children>
       </VBox>
@@ -39,7 +40,7 @@
             <HBox prefHeight="26.0" prefWidth="400.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER">
                <children>
                   <TextField fx:id="messageField" prefHeight="26.0" prefWidth="320.0" />
-                  <Button fx:id="sendButton" mnemonicParsing="false" onAction="#OnSendButtonClicked" prefHeight="26.0" prefWidth="54.0" text="Send" />
+                  <Button fx:id="sendButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnSendButtonClicked" text="Send" />
                   <Text fx:id="textWarning" fill="#dd3434" strokeType="OUTSIDE" strokeWidth="0.0">
                      <HBox.margin>
                         <Insets left="10.0" top="5.0" />

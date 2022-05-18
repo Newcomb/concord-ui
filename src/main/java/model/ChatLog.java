@@ -18,6 +18,9 @@ public class ChatLog implements Serializable
 	public String chatLogName;
 	public int chatTracker;
 	public Boolean locked;
+	public Boolean visible = true;
+	
+	GameLog game = null;
 	
 	public ChatLog() {
 		super();
@@ -37,6 +40,21 @@ public class ChatLog implements Serializable
 		this.locked = false;
 	}
 	
+	/**
+	 * @param chat
+	 * @param chatLogID
+	 * @param chatLogName
+	 */
+	public ChatLog(int chatLogID, String chatLogName, GameLog game)
+	{
+		super();
+		this.chatLogID = chatLogID;
+		this.chatLogName = chatLogName;
+		this.chatTracker = 0;
+		this.locked = false;
+		this.game = game;
+	}
+	
 
 	/**
 	 * @return the chat
@@ -52,9 +70,26 @@ public class ChatLog implements Serializable
 	 */
 	public void addChat(String message, int userID)
 	{
-		chat.put(chatTracker, new Chat(chatTracker, userID, message, new Date(), false));
-		chatTracker++;
+		if (visible == true) {
+			if (game == null) {
+				chat.put(chatTracker, new Chat(chatTracker, userID, message, new Date(), false));
+				chatTracker++;
+			} else {
+				if (game.performMove(message, userID)) {
+					chat.put(chatTracker, new Chat(chatTracker, userID, message, new Date(), false,-1, userID));
+					chatTracker++;
+				} else {
+					chat.put(chatTracker, new Chat(chatTracker, userID, message, new Date(), false));
+					chatTracker++;
+					// Hides the chatLog if it has been "DELETED"
+					if (message.equals("Delete")) {
+						this.visible = false;
+					}
+				}
+			}
+		}
 	}
+	
 
 	/**
 	 * @param chat the chat to set
@@ -216,7 +251,9 @@ public class ChatLog implements Serializable
 		result = prime * result + chatLogID;
 		result = prime * result + ((chatLogName == null) ? 0 : chatLogName.hashCode());
 		result = prime * result + chatTracker;
+		result = prime * result + ((game == null) ? 0 : game.hashCode());
 		result = prime * result + ((locked == null) ? 0 : locked.hashCode());
+		result = prime * result + ((visible == null) ? 0 : visible.hashCode());
 		return result;
 	}
 
@@ -235,10 +272,7 @@ public class ChatLog implements Serializable
 			if (other.chat != null)
 				return false;
 		} else if (!chat.equals(other.chat))
-		{
-			System.out.println("chat list");
 			return false;
-		}
 		if (chatLogID != other.chatLogID)
 			return false;
 		if (chatLogName == null)
@@ -249,13 +283,57 @@ public class ChatLog implements Serializable
 			return false;
 		if (chatTracker != other.chatTracker)
 			return false;
+		if (game == null)
+		{
+			if (other.game != null)
+				return false;
+		} else if (!game.equals(other.game))
+			return false;
 		if (locked == null)
 		{
 			if (other.locked != null)
 				return false;
 		} else if (!locked.equals(other.locked))
 			return false;
+		if (visible == null)
+		{
+			if (other.visible != null)
+				return false;
+		} else if (!visible.equals(other.visible))
+			return false;
 		return true;
+	}
+
+	/**
+	 * @return the game
+	 */
+	public GameLog getGame()
+	{
+		return game;
+	}
+
+	/**
+	 * @param game the game to set
+	 */
+	public void setGame(GameLog game)
+	{
+		this.game = game;
+	}
+
+	/**
+	 * @return the visible
+	 */
+	public Boolean getVisible()
+	{
+		return visible;
+	}
+
+	/**
+	 * @param visible the visible to set
+	 */
+	public void setVisible(Boolean visible)
+	{
+		this.visible = visible;
 	}
 }
 

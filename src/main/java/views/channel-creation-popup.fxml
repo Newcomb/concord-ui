@@ -9,21 +9,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="276.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="276.0" prefWidth="461.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="textLabel" alignment="CENTER" prefHeight="124.0" prefWidth="461.0" text="Create/Edit Channel" />
+      <Label fx:id="textLabel" alignment="CENTER" prefHeight="124.0" prefWidth="461.0" text="Create/Edit Channel" textFill="#84dcc6" />
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label prefHeight="17.0" prefWidth="131.0" text="Channel Name" />
+            <Label prefHeight="17.0" prefWidth="131.0" text="Channel Name" textFill="#84dcc6" />
             <TextField fx:id="channelNameField" />
             <Text fx:id="nameWarning" fill="#e13131" strokeType="OUTSIDE" strokeWidth="0.0" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label prefHeight="17.0" prefWidth="131.0" text="Channel Status" />
-            <CheckBox fx:id="channelLocked" mnemonicParsing="false" text="Locked" />
-            <CheckBox fx:id="channelUnlocked" mnemonicParsing="false" prefHeight="18.0" prefWidth="81.0" text="Unlocked">
+            <Label prefHeight="17.0" prefWidth="131.0" text="Channel Status" textFill="#84dcc6" />
+            <CheckBox fx:id="channelLocked" mnemonicParsing="false" text="Locked" textFill="#f9ada0" />
+            <CheckBox fx:id="channelUnlocked" mnemonicParsing="false" prefHeight="18.0" prefWidth="81.0" text="Unlocked" textFill="#f9ada0">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -35,10 +35,16 @@
             </Text>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onCancelButtonClicked" text="Cancel" />
-            <Button fx:id="submitChannelButton" mnemonicParsing="false" onAction="#onCreateButtonClicked" text="Submit" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onCancelButtonClicked" style="-fx-background-color: #4B4E6D #4B4E6D;" text="Cancel" textFill="#84dcc6">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin></Button>
+            <Button fx:id="submitChannelButton" mnemonicParsing="false" onAction="#onCreateButtonClicked" style="-fx-background-color: #4B4E6D #4B4E6D;" text="Submit" textFill="#84dcc6">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin></Button>
          </children>
       </HBox>
    </children>

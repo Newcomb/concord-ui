@@ -29,6 +29,9 @@ public class ProfilePopupController extends BaseController implements Initializa
     private Button makeModeratorButton;
     
     @FXML
+    private Button changeGameStatusButton;
+    
+    @FXML
     private Button makeNoobButton;
     
     @FXML
@@ -45,6 +48,12 @@ public class ProfilePopupController extends BaseController implements Initializa
         this.userName = newValue;
     }
     
+    
+    @FXML
+    void OnChangeGameStatusButtonClicked(ActionEvent event) throws RemoteException {
+    	client.changeGameStatus(client.selectedRoomObject.getRoomID());
+    	viewFactory.closeStageFromNode(makeModeratorButton);
+    }
 
     @FXML
     void OnMakeModeratorButtonClicked(ActionEvent event) throws RemoteException {
@@ -102,7 +111,13 @@ public class ProfilePopupController extends BaseController implements Initializa
         	} else {
         		status = "Offline";
         	}
-			profile.setText(status + "\n" + client.getUserList().getUser(userName.getUserID()).getProfileData());
+        	String gameStatus;
+        	if (client.getUserList().getUser(userName.getUserID()).getGameStatus().get(client.selectedRoomObject.getRoomID())) {
+        		gameStatus = "Wants to Game";
+        	} else {
+        		gameStatus = "Does not want to game";
+        	}
+			profile.setText("Status: " + status + "\n\n" + client.getUserList().getUser(userName.getUserID()).getProfileData() + "\n\n" + "Game Status: " + gameStatus);
 		} catch (RemoteException e)
 		{
 			// TODO Auto-generated catch block
@@ -115,5 +130,9 @@ public class ProfilePopupController extends BaseController implements Initializa
     		makeNoobButton.setDisable(true);
    
     	}
+    	if (client.getU().getUserID() != userName.getUserID()) {
+    		changeGameStatusButton.setDisable(true);
+    	}
     }
+    
 }

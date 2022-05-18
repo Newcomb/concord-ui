@@ -6,6 +6,7 @@ package modelTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,11 +60,6 @@ class ConcordDataTest
 		
 		// Block a user and try to block twice
 		janice.addBlocked(0);
-	}
-
-	@AfterEach
-	void tearDown() throws Exception
-	{
 	}
 
 	@Test
@@ -171,17 +167,20 @@ class ConcordDataTest
 		
 		// Test online offline users
 		rl.getRoom(0).addUser(2);
-		assertEquals(rl.getRoom(0).getOnline(ul).size(), 0);
-		assertEquals(rl.getRoom(0).getOffline(ul).size(), 1);
+		assertEquals(rl.getRoom(0).getOnline(ul).size(), 1);
+		assertEquals(rl.getRoom(0).getOffline(ul).size(), 2);
 		
 		// Test viewing all users in room
 		ArrayList<String> names = new ArrayList<>();
 		names.add("johne");
+		names.add("bob");
+		names.add("janice");
+
 
 		assertEquals(rl.getRoom(0).getMembers(ul), names);
 		
 		// Test total number of people server has
-		assertEquals(rl.getRoom(0).getUserTable().size(), 1);
+		assertEquals(rl.getRoom(0).getUserTable().size(), 3);
 		
 		// Test that non admin can leave
 		rl.getRoom(0).leaveServer(2);
@@ -212,6 +211,183 @@ class ConcordDataTest
 		
 		// Test that user has profile pic string
 		assertEquals(ul.getUser(0).getProfilePic(), "john.jpeg");
+		
+		
+		
+		
+		
+		// Game Log Testing 
+		// Not testing for more than 4 users here as that will be taken care of in the JVMServerTest
+		List<Integer> users = new ArrayList<Integer>() {{
+			add(0);
+			add(1);
+		}};
+		
+		rl.getRoom(0).addGameChatLog("RSPLS", users);
+		assertEquals(rl.getRoom(0).getChatLog(2).chatLogName, "RSPLS");
+		
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().containsKey(0), true);
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().containsKey(1), true);
+		
+		
+		// Test all combinations of RSPLS
+		
+		// Check that you can send rock and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 0, "Rock");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(0).equals("Rock"), true);
+		
+		// Check that you can send paper and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 1, "Paper");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(1).equals("Paper"), true);
+		
+		// Check that player move resets after game restarts
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(0), "Rock");
+		
+		// Check that you can still send messages
+		rl.getRoom(0).addChat(2, 0, "Howdy");
+		assertEquals(rl.getRoom(0).getChatLog(2).getChat(2).getMessage(), "Howdy");
+		
+		// Check that round win tracker reset after the game
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(1), 1);
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(0), 1);
+		
+		// Check that you can send rock and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 0, "Rock");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(0).equals("Rock"), true);
+		
+		// Check that you can send paper and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 1, "Scissors");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(1).equals("Scissors"), true);
+		
+		// Check for the winner with two people and no extra entries
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(1), -1);
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(0), 0);
+		
+		
+		
+		
+		// Check that you can send rock and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 0, "Rock");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(0).equals("Rock"), true);
+		
+		// Check that you can send paper and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 1, "Lizard");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(1).equals("Lizard"), true);
+		
+		// Check for the winner with two people and no extra entries
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(1), -1);
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(0), 0);
+		
+		// Check that you can send rock and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 0, "Rock");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(0).equals("Rock"), true);
+		
+		// Check that you can send paper and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 1, "Spock");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(1).equals("Spock"), true);
+		
+		// Check for the winner with two people and no extra entries
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(1), 0);
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(0), -1);
+		
+		
+		
+		// Check that you can send rock and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 0, "Paper");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(0).equals("Paper"), true);
+		
+		// Check that you can send paper and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 1, "Scissors");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(1).equals("Scissors"), true);
+		
+		// Check for the winner with two people and no extra entries
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(1), 0);
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(0), -1);
+		
+		
+		
+		// Check that you can send rock and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 0, "Paper");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(0).equals("Paper"), true);
+		
+		// Check that you can send paper and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 1, "Lizard");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(1).equals("Lizard"), true);
+		
+		// Check for the winner with two people and no extra entries
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(1), 0);
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(0), -1);
+		
+		
+		// Check that you can send rock and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 0, "Paper");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(0).equals("Paper"), true);
+		
+		// Check that you can send paper and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 1, "Spock");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(1).equals("Spock"), true);
+		
+		// Check for the winner with two people and no extra entries
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(1), -1);
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(0), 0);
+		
+		
+		// Check that you can send rock and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 0, "Scissors");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(0).equals("Scissors"), true);
+		
+		// Check that you can send paper and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 1, "Lizard");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(1).equals("Lizard"), true);
+		
+		// Check for the winner with two people and no extra entries
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(1), -1);
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(0), 0);
+		
+		
+		// Check that you can send rock and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 0, "Scissors");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(0).equals("Scissors"), true);
+		
+		// Check that you can send paper and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 1, "Spock");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(1).equals("Spock"), true);
+		
+		// Check for the winner with two people and no extra entries
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(1), 0);
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(0), -1);
+		
+		
+		// Check that you can send rock and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 0, "Lizard");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(0).equals("Lizard"), true);
+		
+		// Check that you can send paper and it gets marked in player moves
+		rl.getRoom(0).addChat(2, 1, "Spock");
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getPlayerMoves().get(1).equals("Spock"), true);
+		
+		// Check for the winner with two people and no extra entries
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(1), -1);
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getRoundWinTracker().get(0), 0);
+		
+		List<String> moves = new ArrayList<String>() {{
+			add("Rock");
+			add("Spock");
+			add("Scissors");
+			add("Lizard");
+			add("Paper");
+		}};
+		assertEquals(rl.getRoom(0).getChatLog(2).getGame().getMoves(), moves);
+		
+		
+		
+		// Test making the chatlog Deleted
+		rl.getRoom(0).addChat(2, 0, "Delete");
+		assertEquals(rl.getRoom(0).getChatLog(2).getVisible(), false);
+		
+		// Check that you cant still send messages
+		rl.getRoom(0).addChat(2, 0, "Still works");
+		// assertEquals(rl.getRoom(0).getChatLog(2).getChat(8),null);
 	}
 
 }

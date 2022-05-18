@@ -19,7 +19,7 @@
       <HBox prefHeight="36.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="dmMessageField" prefHeight="34.0" prefWidth="261.0" />
-            <Button fx:id="sendDMButton" mnemonicParsing="false" onAction="#OnClickSendMessage" prefHeight="35.0" prefWidth="91.0" text="Send" />
+            <Button fx:id="sendDMButton" mnemonicParsing="false" onAction="#OnClickSendMessage" prefHeight="35.0" prefWidth="91.0" style="-fx-background-color: #F9ADA0 #F9ADA0;" text="Send" />
          </children>
       </HBox>
    </bottom>

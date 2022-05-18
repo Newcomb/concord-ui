@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Room implements Serializable
 {
@@ -73,6 +74,29 @@ public class Room implements Serializable
 			}
 			return null;
 		}
+		
+		//
+		public Room addGameChatLog(String type, List<Integer> users) {
+			ChatLog cl = null;
+			for (int i = 0; i < users.size(); i++) {
+				if (!userTable.containsKey(users.get(i))) {
+					return null;
+				}
+			}
+			// Will add more if statements when adding new games here
+			if (type.equals("RSPLS")) {
+				System.out.println(users);
+				cl = new ChatLog(chatLogTracker, "RSPLS", new RSPLSGameLog(users));
+			}
+			// This will stay the same
+			if (cl != null) {
+				this.chatLogs.put(chatLogTracker, cl);
+				this.chatLogTracker++;
+				return this;
+			}
+			return null;
+		}
+		
 		
 		public Boolean removeChatLog(int chatLogID, int userID)
 		{
@@ -541,8 +565,8 @@ public class Room implements Serializable
 		@Override
 		public boolean equals(Object obj)
 		{
-			 if (this == obj)
-				 return true;
+			if (this == obj)
+				return true;
 			if (obj == null)
 				return false;
 			if (getClass() != obj.getClass())
@@ -556,9 +580,8 @@ public class Room implements Serializable
 			{
 				if (other.chatLogs != null)
 					return false;
-			} else if (!chatLogs.equals(other.chatLogs)) {
-				System.out.println("chatlog");
-				return false;}
+			} else if (!chatLogs.equals(other.chatLogs))
+				return false;
 			if (description == null)
 			{
 				if (other.description != null)

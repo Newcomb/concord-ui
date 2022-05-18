@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class User implements Serializable
@@ -16,6 +17,7 @@ public class User implements Serializable
 	public String profilePic;
 	public Boolean status;
 	public String profileData;
+	public HashMap<Integer,Boolean> gameStatus =  new HashMap<Integer, Boolean>();
 	
 	private static final long serialVersionUID = 6328716265330861027L;
 	
@@ -226,7 +228,6 @@ public class User implements Serializable
 	}
 	
 	/**
-	 * THIS NEEDS WORK
 	 * @param roomID id of room to add
 	 * @param r - list of rooms to check status
 	 * check if status is public then add otherwise check if you are invited
@@ -236,10 +237,13 @@ public class User implements Serializable
 		if (r.getRoom(roomID).getType()) 
 		{
 			rooms.add(roomID);
+			// init gaming status to false
+			gameStatus.put(roomID, false);
 			return true;
 		}
 		else {
 			if (r.getRoom(roomID).getInviteStatus(this.userID)) {
+				gameStatus.put(roomID, false);
 				rooms.add(roomID);
 				return true;
 			}
@@ -248,6 +252,20 @@ public class User implements Serializable
 		
 	}
 	
+	// Changes the status for a user within a room
+	public boolean changeGameStatus(int roomID) {
+		if (gameStatus.containsKey(roomID)) {
+			if (gameStatus.get(roomID)) {
+				gameStatus.put(roomID, false);
+			} else {
+				gameStatus.put(roomID, true);
+			}
+			return true;
+		}
+		return false;
+	}
+		
+	
 	/**
 	 * Removes room if it exists from rooms
 	 * @param roomID
@@ -255,10 +273,8 @@ public class User implements Serializable
 	public void removeRoom(int roomID) {
 		int index = rooms.indexOf(roomID);
 		if (index != -1) {
+			gameStatus.remove(roomID);
 			rooms.remove(index);
-			if (rooms.contains(roomID)) {
-				System.out.println("Nope");
-			}
 		}
 	}
 	
@@ -322,6 +338,15 @@ public class User implements Serializable
 		rm.addAdmin(this.getUserID());
 		return rm;
 	}
+	
+	// Will make sure that the game status has all the rooms and assign them if not
+	public void checkGameStatus() {
+		for (int key: rooms) {
+			if (!gameStatus.containsKey(key)) {
+				gameStatus.put(key, false);
+			}
+		}
+	}
 
 	/**
 	 * @return the blocked
@@ -351,6 +376,7 @@ public class User implements Serializable
 		int result = 1;
 		result = prime * result + ((blocked == null) ? 0 : blocked.hashCode());
 		result = prime * result + ((directMessages == null) ? 0 : directMessages.hashCode());
+		result = prime * result + ((gameStatus == null) ? 0 : gameStatus.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((profileData == null) ? 0 : profileData.hashCode());
 		result = prime * result + ((profilePic == null) ? 0 : profilePic.hashCode());
@@ -383,6 +409,12 @@ public class User implements Serializable
 			if (other.directMessages != null)
 				return false;
 		} else if (!directMessages.equals(other.directMessages))
+			return false;
+		if (gameStatus == null)
+		{
+			if (other.gameStatus != null)
+				return false;
+		} else if (!gameStatus.equals(other.gameStatus))
 			return false;
 		if (password == null)
 		{
@@ -429,6 +461,22 @@ public class User implements Serializable
 		} else if (!username.equals(other.username))
 			return false;
 		return true;
+	}
+
+	/**
+	 * @return the gameStatus
+	 */
+	public HashMap<Integer, Boolean> getGameStatus()
+	{
+		return gameStatus;
+	}
+
+	/**
+	 * @param gameStatus the gameStatus to set
+	 */
+	public void setGameStatus(HashMap<Integer, Boolean> gameStatus)
+	{
+		this.gameStatus = gameStatus;
 	}
 	
 }

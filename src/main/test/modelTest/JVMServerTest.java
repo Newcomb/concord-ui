@@ -31,6 +31,7 @@ class JVMServerTest
 	User denise;
 	JVMClient c;
 	JVMClient c2;
+	JVMClient c3;
 	
 	@BeforeEach
 	void setUp() throws Exception
@@ -61,6 +62,7 @@ class JVMServerTest
 		rl.addRoom(bob.createRoom("This room is for data science majors!", "GO DS!", true), bob);
 		rl.getRoom(0).inviteUser(1, 0);
 		rl.getRoom(0).addUser(1);
+		rl.getRoom(0).inviteUser(2, 0);
 		
 		rl.getRoom(0).addChatLog("Gaming", 0, false);
 		rl.getRoom(0).getChatLog(0).addChat("Hello!", 0);
@@ -68,6 +70,7 @@ class JVMServerTest
 		serv.setUl(ul);
 		c = new JVMClient();
 		c2 = new JVMClient();
+		c3 = new JVMClient();
 	}
 
 	@AfterEach
@@ -194,6 +197,9 @@ class JVMServerTest
 		
 		// Test another log in 
 		assertEquals(c2.authenticate("janice", "CodingRocks"), true);
+		
+		// Test another log in 
+		assertEquals(c3.authenticate("denise", "DeniseRocks"), true);
 		
 		
 		/*
@@ -456,12 +462,103 @@ class JVMServerTest
 		
 		
 		
-		// Test that XML has been keeping up with changes above
-		JVMServer servCopy = JVMServer.readFromDisk();
 		
-		assertEquals(serv.rl.getRoomTracker(), servCopy.rl.getRoomTracker());
 		
-		assertEquals(serv.equals(servCopy), true);
+		
+		// Test GameLog
+		
+		// Test setting game log status
+		
+		assertEquals(c3.addRoom(0), true); 
+		
+		assertEquals(c.changeGameStatus(0), true);
+		
+		assertEquals(c2.changeGameStatus(0), true);
+		
+		assertEquals(c3.changeGameStatus(0), true);
+		
+		assertEquals(c.createGameChatLog("RSPLS", 0), true);
+		
+		assertEquals(c.getRoom(0).getChatLog(2).getChatLogName(), "RSPLS");
+		
+		assertEquals(c.getRoom(0).getChatLog(2).getChat(0).getMessage(), "Players: bob janice denise ");
+		
+		assertEquals(c2.getRoom(0).getChatLog(2).getChatLogName(), "RSPLS");
+		
+		assertEquals(c2.getRoom(0).getChatLog(2).getChat(1).getMessage(), "Type: \"Delete\" to end the game");
+		
+		assertEquals(c2.getRoom(0).getChatLog(2).getChat(2).getMessage(), "Moves: \"Rock\" \"Spock\" \"Scissors\" \"Lizard\" \"Paper\" ");
+		
+		assertEquals(c3.addChat(2, 0, "Rock"), true);
+		
+		assertEquals(c2.addChat(2, 0, "Rock"), true);
+		
+		assertEquals(c.addChat(2, 0, "Rock"), true);
+		
+		// Check that winner message gets sent when all three players submit
+		assertEquals(c.getRoom(0).getChatLog(2).getChat(6).getMessage(), "Winner: bob janice denise ");
+		
+		// Check that visible for values are correct
+		
+		assertEquals(c.getRoom(0).getChatLog(2).getChat(4).getVisibleFor(), 1);
+		
+		assertEquals(c.getRoom(0).getChatLog(2).getChat(5).getVisibleFor(), 0);
+		
+		assertEquals(c.getRoom(0).getChatLog(2).getChat(3).getVisibleFor(), 2);
+		
+		assertEquals(c.getRoom(0).getChatLog(2).getChat(6).getVisibleFor(), -1);
+		
+		// Check that adding a normal chat wihtout a move is visible for everyone
+		assertEquals(c.addChat(2, 0, "Hello"), true);
+		assertEquals(c.getRoom(0).getChatLog(2).getChat(7).getVisibleFor(), -1);
+		
+		// Check that you can play more rounds after conclusion
+		assertEquals(c3.addChat(2, 0, "Rock"), true);
+		
+		assertEquals(c2.addChat(2, 0, "Lizard"), true);
+		
+		assertEquals(c.addChat(2, 0, "Spock"), true);
+		
+		// If everyone is cancelled out print no winner
+		assertEquals(c.getRoom(0).getChatLog(2).getChat(11).getMessage(), "Winner: ");
+		
+		// Check that you can play more rounds after conclusion
+		assertEquals(c3.addChat(2, 0, "Rock"), true);
+		
+		assertEquals(c2.addChat(2, 0, "Scissors"), true);
+		
+		assertEquals(c.addChat(2, 0, "Spock"), true);
+		
+		assertEquals(c.getRoom(0).getChatLog(2).getChat(15).getMessage(), "Winner: bob ");
+		
+		
+		// Check that you can play more rounds after conclusion and that both winners will be rewarded
+		assertEquals(c3.addChat(2, 0, "Rock"), true);
+		
+		assertEquals(c2.addChat(2, 0, "Spock"), true);
+		
+		assertEquals(c.addChat(2, 0, "Spock"), true);
+		
+		assertEquals(c.getRoom(0).getChatLog(2).getChat(19).getMessage(), "Winner: bob janice ");
+		
+		// The logic from the previous tests works and it works given three options so I am not testing all combinations here.
+		
+		// Test that delete works
+		assertEquals(c3.addChat(2, 0, "Delete"), true);
+		
+		assertEquals(c3.getRoom(0).getChatLog(2).getVisible(), false);
+		
+		
+		
+		
+		
+		
+//		// Test that XML has been keeping up with changes above
+//		JVMServer servCopy = JVMServer.readFromDisk();
+//		
+//		assertEquals(serv.rl.getRoomTracker(), servCopy.rl.getRoomTracker());
+//		
+//		assertEquals(serv.equals(servCopy), true);
 		
 		
 		

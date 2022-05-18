@@ -7,7 +7,9 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import javafx.application.Platform;
@@ -42,6 +44,7 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
     public ObservableList<Room> dms = FXCollections.observableArrayList();
     public ObservableList<String> users = FXCollections.observableArrayList();
 	public ObservableList<Room> exploreRooms = FXCollections.observableArrayList();
+	public ObservableList<String> gameList = FXCollections.observableArrayList();
 	public JVMClient() throws RemoteException{
 		try
 		{	
@@ -81,7 +84,10 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
         	if (selectedRoomObject != null) {
 
 			for (Integer channelID : rl.getRoom(selectedRoomObject.getRoomID()).getChatLogs().keySet()) {
-				add(rl.getRoom(selectedRoomObject.getRoomID()).getChatLog(channelID));
+				// Make sure that the room is visible
+				if (rl.getRoom(selectedRoomObject.getRoomID()).getChatLog(channelID).getVisible()) {
+					add(rl.getRoom(selectedRoomObject.getRoomID()).getChatLog(channelID));
+				}
 			}
         	}
         }};
@@ -165,7 +171,14 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 			    	Collections.sort(arr);
 					for (Integer chatID : arr) {
 						if (!rl.getRoom(selectedRoomObject.getRoomID()).getChatLog(selectedChatLogObject.getChatLogID()).getChat(chatID).deleted) {
-							add(rl.getRoom(selectedRoomObject.getRoomID()).getChatLog(selectedChatLogObject.getChatLogID()).getChat(chatID));
+							if (rl.getRoom(selectedRoomObject.getRoomID()).getChatLog(selectedChatLogObject.getChatLogID()).getGame() == null) {
+								add(rl.getRoom(selectedRoomObject.getRoomID()).getChatLog(selectedChatLogObject.getChatLogID()).getChat(chatID));
+							}
+							else {
+								if (u.getUserID() ==  rl.getRoom(selectedRoomObject.getRoomID()).getChatLog(selectedChatLogObject.getChatLogID()).getChat(chatID).visibleFor || rl.getRoom(selectedRoomObject.getRoomID()).getChatLog(selectedChatLogObject.getChatLogID()).getChat(chatID).visibleFor == -1)
+								add(rl.getRoom(selectedRoomObject.getRoomID()).getChatLog(selectedChatLogObject.getChatLogID()).getChat(chatID));
+						}
+							System.out.println(rl.getRoom(selectedRoomObject.getRoomID()).getChatLog(selectedChatLogObject.getChatLogID()).getChat(chatID).visibleFor);
 						}
 					
 				
@@ -231,6 +244,18 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
         this.dms.clear();
         this.dms.addAll(dms);
     }
+    
+    
+	public void initializeGameData()
+	{
+		// New names will need to be added here to keep up with the variety of games
+		List<String> games = new ArrayList<String>() {{
+			add("RSPLS");
+		}};
+		gameList.clear();
+		gameList.addAll(games);
+		
+	}
 	
 	// Logs user out and set u to null
 	public Boolean logOut() throws RemoteException
@@ -314,8 +339,12 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 	public Boolean createRoom(String des, String logo, Boolean type) throws RemoteException
 	{
 		if (u != null) {
-			if (serv.createRoom(des, logo, type, u)) {
+			Room r = serv.createRoom(des, logo, type, u);
+			if (r != null) {
 				u = serv.getUl().getUser(u.getUserID());
+				u.gameStatus.put(r.getRoomID(), false);
+				u.checkGameStatus();
+				notifyServer();
 				rl = serv.getRl();
 				return true;
 			}
@@ -356,6 +385,63 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 		}
 		return false;
 	}
+	
+	
+	// Will change the status of the user who clicks the change game status button
+	public Boolean changeGameStatus(int roomID) throws RemoteException {
+		if (u.changeGameStatus(roomID)) {
+			serv.updateUser(u);
+			return true;
+		}
+		return false;
+	}
+	
+	// All games will have four or fewer players, so get the users that want to play and randomly remove until you have 4
+	public Boolean createGameChatLog(String type, int roomID) throws RemoteException
+	{
+		List<Integer> users = null;
+		if (u != null) {
+			Room r = serv.getRl().getRoom(roomID);
+			Set<Integer> userKeys = r.getUserTable().keySet();
+			UserList ul = serv.getUl();
+			List<Integer> gameUsers = new ArrayList<Integer>();
+			for (int key: userKeys) {
+				if (ul.getUser(key).getGameStatus().get(roomID)) {
+					gameUsers.add(key);
+				}
+			}
+			
+			int result;
+			while (gameUsers.size() > 4) {
+				Random rand = new Random(); 
+				result = rand.nextInt(gameUsers.size());
+	        	gameUsers.remove(result);
+			}
+			if (gameUsers.size() > 1) {
+				// Will need to loop and pick users
+				if (serv.addGameChatLog(type, roomID, u.getUserID(), gameUsers)) {
+					int index = serv.getRoom(roomID).chatLogTracker-1;
+					String names = "";
+					for (int key:  serv.getChatLog(index, roomID).getGame().getPlayerMoves().keySet()) {
+						names = names + ul.getUser(key).getUsername() + " ";
+					}
+					serv.addChat(u.getUserID(), index, roomID, "Players: " + names);
+					serv.addChat(u.getUserID(), index, roomID, "Type: \"Delete\" to end the game");
+					// Print out the moves that a user can make
+					String moves = "Moves: ";
+					for (String s: serv.getRoom(roomID).getChatLog(index).getGame().getMoves()) {
+						moves = moves +"\""+ s + "\" ";
+					}
+					serv.addChat(u.getUserID(), index, roomID, moves);
+					return true;
+				}
+			}
+		}
+		System.out.println("False Here");
+		return false;
+		
+	}
+	
 	
 	// Removes a chat log that is no longer needed
 	public Boolean removeChatLog(int roomID, int chatLogID) throws RemoteException
@@ -471,7 +557,19 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 	public Boolean addChat(int chatLogID, int roomID, String message) throws RemoteException
 	{
 		if (u != null) {
-			return serv.addChat(u.getUserID(), chatLogID, roomID, message);
+			if (serv.addChat(u.getUserID(), chatLogID, roomID, message)) {
+				if (serv.getChatLog(chatLogID, roomID).getGame() != null) {
+					if (serv.getChatLog(chatLogID, roomID).getGame().getWinner()) {
+						List<Integer> winList = serv.getChatLog(chatLogID, roomID).getGame().checkForWinner();
+						String stringWin = "Winner: ";
+						for (int key: winList) {
+							stringWin = stringWin + serv.getUl().getUser(key).getUsername() + " ";
+						}
+						serv.addChat(u.getUserID(), chatLogID, roomID, stringWin);
+					}
+				}
+			}
+			return true;
 		}
 		return false;
 	}
@@ -722,6 +820,8 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 	{
 		this.rl = rl;
 	}
+
+
 
 
 
