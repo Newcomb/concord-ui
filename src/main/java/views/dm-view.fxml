@@ -8,12 +8,12 @@
 
 <BorderPane id="dmView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select DM" />
+            <Text fill="#f9ada0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select DM" />
             <ListView fx:id="dmLists" prefHeight="376.0" prefWidth="100.0" />
-            <Button fx:id="createDMButton" mnemonicParsing="false" onAction="#OnCreateDMButtonClicked" prefHeight="26.0" prefWidth="102.0" text="Create DM" />
-            <Button fx:id="blockUserButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnBlockUserButtonClicked" text="Block User" />
+            <Button fx:id="createDMButton" mnemonicParsing="false" onAction="#OnCreateDMButtonClicked" prefHeight="26.0" prefWidth="102.0" style="-fx-background-color: #F9ADA0 #F9ADA0; -fx-border-color: gray;" text="Create DM" />
+            <Button fx:id="blockUserButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnBlockUserButtonClicked" style="-fx-background-color: #F9ADA0 #F9ADA0;" text="Block User" />
          </children>
       </VBox>
    </left>

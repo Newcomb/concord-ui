@@ -8,12 +8,10 @@ below moderator. This role is Noob and it is automatically assigned to the user 
 moderator is, so I left it to the administrator to specify any role assignments.
 For Sprint 2, I believe I have implemented all necessary features based on the google document provided on Moodle.
 
-For Sprint 4B I made a collection of functional tests that are run individually but focus on a specific part of the implementation. First run the 
-JVMServerTest.java in src/main/test file, then run TestJUnit1.java respectively from src/test/java file. I sadly was not able to implement everything as of now, for some reason trying to
- test certain buttons and list views was not possible.
+For Sprint 4B I made a single functional test of the application which I believe covers everything that needs to be tested. First run the 
+JVMServerTest.java in src/main/test file, then run TestJUnit1.java respectively from src/test/java file.
  
- 
- I have implemented the entirety of my sprint, and hopefully tested all necessary features. 
+I have implemented the entirety of my sprint, and hopefully tested all necessary features. 
 When you run the code on your computer you may notice a java runtime exception error when the tests get to the GameLogs.
 I am not sure why this is happening but it does not seem to have any influence on the process of running the application so I stopped trying to fix it. 
 I currently have test code at the end of ConcordDataTest.java, around line 470 in JVMServerTest.java, and around line 930 in TestJUnit1.java. 

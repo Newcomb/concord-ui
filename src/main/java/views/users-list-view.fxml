@@ -12,9 +12,9 @@
    <bottom>
       <HBox alignment="TOP_RIGHT" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="closeUsersButton" mnemonicParsing="false" onAction="#OnCloseButtonClicked" prefHeight="26.0" prefWidth="50.0" text="Close" />
-            <Button fx:id="actionButton" mnemonicParsing="false" onAction="#OnActionButtonClicked" prefHeight="26.0" prefWidth="75.0" />
-            <Button fx:id="actionButtonTwo" mnemonicParsing="false" onAction="#OnActionButtonTwoClicked" prefHeight="26.0" prefWidth="82.0" />
+            <Button fx:id="closeUsersButton" mnemonicParsing="false" onAction="#OnCloseButtonClicked" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: #F9ADA0 #F9ADA0; -fx-border-color: gray;" text="Close" />
+            <Button fx:id="actionButton" mnemonicParsing="false" onAction="#OnActionButtonClicked" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: #F9ADA0 #F9ADA0; -fx-border-color: gray;" />
+            <Button fx:id="actionButtonTwo" mnemonicParsing="false" onAction="#OnActionButtonTwoClicked" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: #F9ADA0 #F9ADA0; -fx-border-color: gray;" />
          </children>
       </HBox>
    </bottom>

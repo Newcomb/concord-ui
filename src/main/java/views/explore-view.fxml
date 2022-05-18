@@ -12,8 +12,8 @@
    <bottom>
       <HBox prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="44.0" prefWidth="266.0" text="Cancel" />
-            <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddButtonClicked" prefHeight="45.0" prefWidth="333.0" text="Add" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="44.0" prefWidth="266.0" style="-fx-background-color: #84DCC6 #84DCC6; -fx-border-color: #4B4E6D #4B4E6D;" text="Cancel" />
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddButtonClicked" prefHeight="45.0" prefWidth="333.0" style="-fx-background-color: #84DCC6 #84DCC6; -fx-border-color: #4B4E6D #4B4E6D;" text="Add" />
          </children>
       </HBox>
    </bottom>
