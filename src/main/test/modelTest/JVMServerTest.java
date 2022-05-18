@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,9 +32,13 @@ class JVMServerTest
 	User janice;
 	Registry registry;
 	User denise;
+	User janet;
+	User ralph;
 	JVMClient c;
 	JVMClient c2;
 	JVMClient c3;
+	JVMClient c4; 
+	JVMClient c5;
 	
 	@BeforeEach
 	void setUp() throws Exception
@@ -54,15 +61,21 @@ class JVMServerTest
 		bob = new User("bob", "Bob Allen", null, false, "I am a freelance encoder!", "ILoveDogs");
 		janice = new User("janice", "Janice Nelson", null, true, "I am a freelance decoder!", "CodingRocks");
 		denise = new  User("denise", "denise Nelson", null, true, "I am a freelance decoder!", "DeniseRocks");
+		janet = new User("janet", "janet nelson", null, true, "I am a freelance person", "JanetRocks");
+		ralph = new User("ralph", "ralph holms", null, true, "I am a human", "RalphRocks");
 		
 		ul.addUser(bob);
 		ul.addUser(janice);
 		ul.addUser(denise);
+		ul.addUser(janet);
+		ul.addUser(ralph);
 		
 		rl.addRoom(bob.createRoom("This room is for data science majors!", "GO DS!", true), bob);
 		rl.getRoom(0).inviteUser(1, 0);
 		rl.getRoom(0).addUser(1);
 		rl.getRoom(0).inviteUser(2, 0);
+		rl.getRoom(0).inviteUser(3, 0);
+		rl.getRoom(0).inviteUser(4, 0);
 		
 		rl.getRoom(0).addChatLog("Gaming", 0, false);
 		rl.getRoom(0).getChatLog(0).addChat("Hello!", 0);
@@ -71,6 +84,8 @@ class JVMServerTest
 		c = new JVMClient();
 		c2 = new JVMClient();
 		c3 = new JVMClient();
+		c4 = new JVMClient();
+		c5 = new JVMClient();
 	}
 
 	@AfterEach
@@ -200,6 +215,10 @@ class JVMServerTest
 		
 		// Test another log in 
 		assertEquals(c3.authenticate("denise", "DeniseRocks"), true);
+		
+		assertEquals(c4.authenticate("janet", "JanetRocks"), true);
+		
+		assertEquals(c5.authenticate("ralph", "RalphRocks"), true);
 		
 		
 		/*
@@ -471,16 +490,27 @@ class JVMServerTest
 		
 		assertEquals(c3.addRoom(0), true); 
 		
+		// Test trying to create a gameLog with no gamers
+		assertEquals(c.createGameChatLog("RSPLS", 0), false);
+		
+		// change a users status to wanting to game
 		assertEquals(c.changeGameStatus(0), true);
 		
+		// Test trying to create a gameLog with one person 
+		assertEquals(c.createGameChatLog("RSPLS", 0), false);
+		
+		// Change more users to wantting to game
 		assertEquals(c2.changeGameStatus(0), true);
 		
 		assertEquals(c3.changeGameStatus(0), true);
 		
+		// Check that creating a gamelog works now
 		assertEquals(c.createGameChatLog("RSPLS", 0), true);
 		
 		assertEquals(c.getRoom(0).getChatLog(2).getChatLogName(), "RSPLS");
 		
+		
+		// Check initial messages
 		assertEquals(c.getRoom(0).getChatLog(2).getChat(0).getMessage(), "Players: bob janice denise ");
 		
 		assertEquals(c2.getRoom(0).getChatLog(2).getChatLogName(), "RSPLS");
@@ -488,6 +518,8 @@ class JVMServerTest
 		assertEquals(c2.getRoom(0).getChatLog(2).getChat(1).getMessage(), "Type: \"Delete\" to end the game");
 		
 		assertEquals(c2.getRoom(0).getChatLog(2).getChat(2).getMessage(), "Moves: \"Rock\" \"Spock\" \"Scissors\" \"Lizard\" \"Paper\" ");
+		
+		// Check that inputting all the same values gives everyone as winner
 		
 		assertEquals(c3.addChat(2, 0, "Rock"), true);
 		
@@ -548,17 +580,60 @@ class JVMServerTest
 		
 		assertEquals(c3.getRoom(0).getChatLog(2).getVisible(), false);
 		
+		// Add more users to put in the game and change game status
+		assertEquals(c4.addRoom(0), true);
+		assertEquals(c5.addRoom(0), true);
+		assertEquals(c4.changeGameStatus(0), true);
+		assertEquals(c5.changeGameStatus(0), true);
+		
+//		// Check that creating a gamelog works now
+		assertEquals(c.createGameChatLog("RSPLS", 0), true);
 		
 		
+		List<Integer> users = new ArrayList<Integer>() {{
+			for (int id: c.getRoom(0).getChatLog(3).getGame().getPlayerMoves().keySet()) {
+				add(id);
+			}
+		}};
+		
+		// Tests that all permutations work and that randomization works
+		try
+		{
+			if (users.indexOf(4) == -1) {
+				testRSPLS(users,c, c2, c3, c4);
+			}
+			else if (users.indexOf(3) == -1){
+				testRSPLS(users,c, c2, c3, c5);
+			}
+			else if (users.indexOf(2) == -1){
+				testRSPLS(users,c, c2, c4, c5);
+			}
+			else if (users.indexOf(1) == -1){
+				testRSPLS(users,c, c3, c4, c5);
+			}
+			else if (users.indexOf(0) == -1){
+				testRSPLS(users,c2, c3, c4, c5);
+			}
+		} catch (RemoteException | InterruptedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// Test that delete works
+		assertEquals(c3.addChat(3, 0, "Delete"), true);
+		
+		assertEquals(c4.changeGameStatus(0), true);
+		assertEquals(c5.changeGameStatus(0), true);
 		
 		
 		
 //		// Test that XML has been keeping up with changes above
-//		JVMServer servCopy = JVMServer.readFromDisk();
-//		
-//		assertEquals(serv.rl.getRoomTracker(), servCopy.rl.getRoomTracker());
-//		
-//		assertEquals(serv.equals(servCopy), true);
+		JVMServer servCopy = JVMServer.readFromDisk();
+		
+		assertEquals(serv.rl.getRoomTracker(), servCopy.rl.getRoomTracker());
+		
+		assertEquals(serv.equals(servCopy), true);
 		
 		
 		
@@ -579,6 +654,107 @@ class JVMServerTest
 		
 		
 		
+	}
+	
+	
+	// This method checks every possible combination with 4 people and works on the randomly chosen people
+	public void testRSPLS(List<Integer> users, JVMClient c, JVMClient c2, JVMClient c3, JVMClient c4) throws RemoteException, InterruptedException {
+		List<String> moves = new ArrayList<String>() {{
+			add("Rock");
+			add("Paper");
+			add("Scissors");
+			add("Lizard");
+			add("Spock");
+		}};
+		
+		List<String> moves1 = new ArrayList<String>() {{
+			add("Paper");
+			add("Scissors");
+			add("Lizard");
+			add("Spock");
+		}};
+		
+		List<String> moves2 = new ArrayList<String>() {{
+			add("Scissors");
+			add("Lizard");
+			add("Spock");
+		}};
+		
+		List<String> moves3 = new ArrayList<String>() {{
+			add("Lizard");
+			add("Spock");
+		}};
+		
+		int chatTracker = 2;
+		for (String s: moves) {
+			
+			for (String s1: moves1) {
+				
+				for (String s2: moves2) {
+					
+					for (String s3: moves3) {
+						
+							assertEquals(c.addChat(3, 0, s), true);
+							assertEquals(c2.addChat(3, 0, s1), true);
+							assertEquals(c3.addChat(3, 0, s2), true);
+							assertEquals(c4.addChat(3, 0, s3), true);
+							chatTracker = chatTracker + 4;
+							HashMap<Integer, String> playerMoves = new HashMap<Integer, String>(){{;
+								put(c.getU().getUserID(), s);
+								put(c2.getU().getUserID(), s1);
+								put(c3.getU().getUserID(), s2);
+								put(c4.getU().getUserID(), s3);
+							}};
+							HashMap<Integer, Integer> roundWinTracker = c.getRoom(0).getChatLog(3).getGame().getRoundWinTracker();
+							for (int key: playerMoves.keySet()) {
+								roundWinTracker.put(key, 0);
+								for (int secKey: playerMoves.keySet()) {
+									if (playerMoves.get(key).equals("Rock")){
+										if (playerMoves.get(secKey).equals("Spock") || playerMoves.get(secKey).equals("Paper")) {
+											roundWinTracker.put(key, -1);
+										}
+									}
+									if (playerMoves.get(key).equals("Paper")) {
+										if (playerMoves.get(secKey).equals("Scissors") || playerMoves.get(secKey).equals("Lizard")) {
+											roundWinTracker.put(key, -1);
+										}
+									}
+									if (playerMoves.get(key).equals("Scissors")) {
+										if (playerMoves.get(secKey).equals("Rock") || playerMoves.get(secKey).equals("Spock")) {
+											roundWinTracker.put(key, -1);
+										}
+									}
+									if (playerMoves.get(key).equals("Lizard")) {
+										if (playerMoves.get(secKey).equals("Scissors") || playerMoves.get(secKey).equals("Rock")) {
+											roundWinTracker.put(key, -1);
+										}
+									}
+									if (playerMoves.get(key).equals("Spock")) {
+										if (playerMoves.get(secKey).equals("Paper") || playerMoves.get(secKey).equals("Lizard")) {
+											roundWinTracker.put(key, -1);
+										}
+									}
+								}
+							}
+	
+							chatTracker++;
+							String winners = "Winner: ";
+							int track = 0;
+							for (int key: roundWinTracker.keySet()) {
+								if (roundWinTracker.get(key) == 0) {
+									winners = winners + c.getUserList().getUser(key).getUsername() + " ";
+
+									
+								}
+	
+							}
+							assertEquals(c.getRoom(0).getChatLog(3).getChat(chatTracker).toString(), chatTracker + " : " + winners);
+							
+						
+					}
+				}
+			}
+		}
 	}
 
 }

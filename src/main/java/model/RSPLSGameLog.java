@@ -171,12 +171,18 @@ public class RSPLSGameLog extends GameLog
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (this == obj)
+		if (this == obj) {
+			System.out.println("Break one");
 			return true;
-		if (!super.equals(obj))
+		}
+//		if (!super.equals(obj)) {
+//			System.out.println("Break two");
+//			return false;
+//		}
+		if (getClass() != obj.getClass()) {
+			System.out.println("Break three");
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		return true;
 	}
 

@@ -409,7 +409,7 @@ public class TestJUnit1
 	    		    robot.clickOn("#sendButton");
 	    		    semaphore.release();
 	    		    
-	    	   // });
+	    	   // }); 
 	         });
 			});
 			semaphore.acquire();

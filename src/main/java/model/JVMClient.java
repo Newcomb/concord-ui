@@ -546,6 +546,7 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 		return false;
 	}
 	
+	// Sets a chat log to locked so other users cant add chats
 	public Boolean setChatLogLocked(int chatLogID, int roomID, Boolean locked) throws RemoteException
 	{
 		if (u != null) {
@@ -554,6 +555,7 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 		return false;
 	}
 	
+	// This takes on some functionality for the gamelog, I probably should have implemented this inside of the chatlog instead
 	public Boolean addChat(int chatLogID, int roomID, String message) throws RemoteException
 	{
 		if (u != null) {
@@ -574,6 +576,7 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 		return false;
 	}
 	
+	// Reply to another persons chat 
 	public Boolean chatLogReply(String message, int roomID, int chatLogID, int replyID) throws RemoteException
 	{
 		if (u != null) {
@@ -582,6 +585,7 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 		return false;
 	}
 	
+	// Pin a message
 	public Boolean pinMessage(int chatID, int roomID, int chatlogID) throws RemoteException
 	{
 		if (u != null) {
@@ -590,6 +594,7 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 		return false;
 	}
 	
+	// Unpin a message from the chat
 	public List<Chat> getPinnedMessages(int roomID, int chatLogID) throws RemoteException
 	{
 		if (u != null) {
@@ -597,6 +602,7 @@ public class JVMClient extends UnicastRemoteObject implements Serializable, RMIO
 		}
 		return null;
 	}
+	
 	
 	public Room getRoom(int roomID) throws RemoteException
 	{

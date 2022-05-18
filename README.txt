@@ -14,6 +14,7 @@ JVMServerTest.java in src/main/test file, then run TestJUnit1.java respectively 
 I have implemented the entirety of my sprint, and hopefully tested all necessary features. 
 When you run the code on your computer you may notice a java runtime exception error when the tests get to the GameLogs.
 I am not sure why this is happening but it does not seem to have any influence on the process of running the application so I stopped trying to fix it. 
-I currently have test code at the end of ConcordDataTest.java, around line 470 in JVMServerTest.java, and around line 930 in TestJUnit1.java. 
+I currently have test code at the end of ConcordDataTest.java, around line 470 in JVMServerTest.java (This will take a very long time to run given I did all combinations with 4 players and looks like it is breaking but it is an unkown exception that is not doing anything), 
+and around line 930 in TestJUnit1.java. 
 These should be run in the order presented above. I have not made any corrections as I do not believe any were necessary, although I did end up leaving out the 
 images showing up in the profile but the link is still stored. 
