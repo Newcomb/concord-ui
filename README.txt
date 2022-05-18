@@ -11,3 +11,11 @@ For Sprint 2, I believe I have implemented all necessary features based on the g
 For Sprint 4B I made a collection of functional tests that are run individually but focus on a specific part of the implementation. First run the 
 JVMServerTest.java in src/main/test file, then run TestJUnit1.java respectively from src/test/java file. I sadly was not able to implement everything as of now, for some reason trying to
  test certain buttons and list views was not possible.
+ 
+ 
+ I have implemented the entirety of my sprint, and hopefully tested all necessary features. 
+When you run the code on your computer you may notice a java runtime exception error when the tests get to the GameLogs.
+I am not sure why this is happening but it does not seem to have any influence on the process of running the application so I stopped trying to fix it. 
+I currently have test code at the end of ConcordDataTest.java, around line 470 in JVMServerTest.java, and around line 930 in TestJUnit1.java. 
+These should be run in the order presented above. I have not made any corrections as I do not believe any were necessary, although I did end up leaving out the 
+images showing up in the profile but the link is still stored. 
